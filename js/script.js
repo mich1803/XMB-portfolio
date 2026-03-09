@@ -47,7 +47,7 @@ const updateSubmenuState = () => {
 const updateSectionState = () => {
   sections.forEach((section, idx) => {
     section.classList.toggle('active', idx === sectionIndex);
-    section.style.transform = idx > sectionIndex ? 'translateX(72px)' : 'translateX(0)';
+    section.style.transform = idx > sectionIndex ? 'translateX(120px)' : 'translateX(0)';
   });
   moveMenu(sectionIndex);
   updateSubmenuState();
