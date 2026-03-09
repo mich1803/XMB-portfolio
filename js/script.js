@@ -68,7 +68,10 @@ const updateSectionState = () => {
 };
 
 const setSection = (newIndex) => {
-  sectionIndex = Math.max(0, Math.min(newIndex, sections.length - 1));
+  const boundedIndex = Math.max(0, Math.min(newIndex, sections.length - 1));
+  if (boundedIndex === sectionIndex) return;
+
+  sectionIndex = boundedIndex;
   subsectionIndex = 0;
   updateSectionState();
 };

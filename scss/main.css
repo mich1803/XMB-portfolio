@@ -863,3 +863,47 @@ body.app-ready {
 .xmb-title.active .xmb-contents .submenu {
   transform: translateX(var(--submenu-align-shift, 0px));
 }
+
+/* 2026 UX polish fixes */
+@keyframes subtleGlow {
+  from {
+    text-shadow: 0 0 1px rgba(224, 224, 224, 0.5), 0 0 4px rgba(180, 180, 180, 0.35);
+  }
+  to {
+    text-shadow: 0 0 2px rgba(236, 236, 236, 0.65), 0 0 7px rgba(188, 188, 188, 0.45);
+  }
+}
+
+.xmb-title.active .titletext,
+.xmb-contents .submenu.active .context .item-title {
+  animation: subtleGlow 1.25s ease-in-out infinite alternate !important;
+}
+
+/* Normalize section spacing so selected section is not too far from left neighbors */
+.xmb-main .xmb-title {
+  margin-left: 34px !important;
+}
+
+.xmb-main .xmb-title.homeMenu {
+  margin-left: 0 !important;
+}
+
+/* Prevent submenu rows from collapsing upward and overlapping section icon */
+.xmb-title.active .xmb-contents {
+  margin-top: 44px !important;
+}
+
+.xmb-title.active .xmb-contents .submenu,
+.xmb-title.active .xmb-contents .submenu.one,
+.xmb-title.active .xmb-contents .submenu.two,
+.xmb-title.active .xmb-contents .submenu.three,
+.xmb-title.active .xmb-contents .submenu.four,
+.xmb-title.active .xmb-contents .submenu.five {
+  margin-top: 0 !important;
+  padding-bottom: 14px;
+}
+
+.xmb-title.active .xmb-contents .submenu.inactive {
+  margin-top: 0 !important;
+  opacity: 0.58;
+}
