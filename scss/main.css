@@ -780,3 +780,25 @@ body.app-ready {
 .xmb-title.active .xmb-contents .submenu .context {
   margin-left: 16px !important;
 }
+
+/* Requested update: wider open content + hide subtext2 unless selected */
+.xmb-title.active .xmb-contents {
+  min-width: 520px !important;
+}
+
+.xmb-title.active .xmb-contents .context {
+  max-width: 430px;
+}
+
+.xmb-contents .submenu .context .subtext2 {
+  opacity: 0 !important;
+  visibility: hidden;
+  max-height: 0;
+  overflow: hidden;
+}
+
+.xmb-contents .submenu.active .context .subtext2 {
+  opacity: 0.85 !important;
+  visibility: visible;
+  max-height: 80px;
+}

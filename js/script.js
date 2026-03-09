@@ -1,7 +1,5 @@
 const video = document.getElementById('vid');
 const menu = document.getElementById('menu');
-const clockSection = document.querySelector('.clock');
-const dateTime = document.getElementById('date');
 const xmbMain = document.querySelector('.xmb-main');
 const sections = Array.from(document.querySelectorAll('.xmb-title'));
 const navSound = document.getElementById('nav');
@@ -52,13 +50,6 @@ const updateSectionState = () => {
   });
   moveMenu(sectionIndex);
   updateSubmenuState();
-};
-
-const sideClock = () => {
-  const d = new Date();
-  const minutes = String(d.getMinutes()).padStart(2, '0');
-  const clock = `${d.getDate()}/${d.getMonth() + 1} ${d.getHours()}:${minutes}`;
-  dateTime.innerText = clock;
 };
 
 const setSection = (newIndex) => {
@@ -123,11 +114,8 @@ window.addEventListener('load', () => {
   video.play().catch(() => {});
   video.style.opacity = '1';
   menu.style.opacity = '1';
-  clockSection.style.opacity = '1';
   document.body.classList.add('app-ready');
 
-  sideClock();
-  setInterval(sideClock, 1000);
   updateSectionState();
   registerPointerNavigation();
 });
