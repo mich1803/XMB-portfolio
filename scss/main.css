@@ -613,3 +613,68 @@ body {
   padding: 20px 0px;
   margin-top: -10px;
 }/*# sourceMappingURL=main.css.map */
+/* Portfolio customizations */
+body {
+  opacity: 0;
+  transition: opacity 450ms ease-in;
+}
+
+body.app-ready {
+  opacity: 1;
+}
+
+.back-vid,
+#menu,
+.clock {
+  transition-duration: 450ms;
+}
+
+.xmb-contents .submenu {
+  cursor: pointer;
+}
+
+/* Requested refinements: wider open section + 3 info levels */
+.xmb-title.active .xmb-contents {
+  margin-left: 28px !important;
+  min-width: 520px;
+}
+
+.xmb-title.active .xmb-contents .context {
+  min-width: 430px;
+}
+
+.xmb-contents .context .subtext {
+  margin-top: 6px;
+  font-size: 0.95rem !important;
+  line-height: 1.2;
+}
+
+.xmb-contents .context .subtext2 {
+  margin-top: 4px;
+  font-size: 0.78rem !important;
+  opacity: 0.9;
+  line-height: 1.2;
+}
+
+.xmb-title.settings .xmb-contents .submenu .context .subtext {
+  position: absolute;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.xmb-title.settings .xmb-contents .submenu .context .subtext2 {
+  position: absolute;
+  margin-left: 10px;
+  margin-top: 28px;
+  opacity: 0;
+}
+
+.xmb-title.settings .xmb-contents .submenu.two.active .context .subtext2,
+.xmb-title.settings .xmb-contents .submenu.three.active .context .subtext2,
+.xmb-title.settings .xmb-contents .submenu.one .context .subtext2 {
+  opacity: 1;
+}
+
+.xmb-title.settings .xmb-contents .submenu.one.inactive .context .subtext2 {
+  opacity: 0;
+}
