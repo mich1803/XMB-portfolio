@@ -830,3 +830,31 @@ body.app-ready {
 .xmb-title.active .xmb-contents .submenu .context {
   margin-left: 16px !important;
 }
+
+
+/* Final layout model: icon column aligned to selected section + wide content block */
+.xmb-title.active .xmb-contents {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.xmb-title.active .xmb-contents .submenu {
+  display: grid;
+  grid-template-columns: 96px minmax(520px, 720px);
+  column-gap: 18px;
+  align-items: start;
+  margin-left: 0 !important;
+}
+
+.xmb-title.active .xmb-contents .submenu img {
+  width: 96px;
+  height: auto;
+  margin-left: 0 !important;
+}
+
+.xmb-title.active .xmb-contents .submenu .context {
+  width: 100% !important;
+  min-width: 520px !important;
+  max-width: 720px !important;
+  margin-left: 0 !important;
+}
