@@ -20,7 +20,7 @@ This repository is an unofficial recreation inspired by the visual style of Sony
 You are free to fork, modify, and use this project as your own academic/professional portfolio.
 
 If you publish a derivative, please give a quick credit/shout out to:
-- this repo owner, and
+- mich1803 (me), and
 - [menonparik/xmb-on-web](https://github.com/menonparik/xmb-on-web).
 
 ---
@@ -30,7 +30,7 @@ If you publish a derivative, please give a quick credit/shout out to:
 ### 1) Clone and run locally
 
 ```bash
-git clone https://github.com/<your-username>/XMB-portfolio.git
+git clone https://github.com/mich1803/XMB-portfolio.git
 cd XMB-portfolio
 python3 -m http.server 8080
 ```
