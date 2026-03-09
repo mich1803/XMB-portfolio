@@ -678,3 +678,44 @@ body.app-ready {
 .xmb-title.settings .xmb-contents .submenu.one.inactive .context .subtext2 {
   opacity: 0;
 }
+
+/* Fix title/subtext stacking and section horizontal alignment */
+.xmb-title.active .xmb-contents {
+  margin-left: 0 !important;
+  transform: translateX(-26px);
+  min-width: 500px;
+}
+
+.xmb-contents .submenu .context {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
+}
+
+.xmb-contents .submenu .context .item-title,
+.xmb-contents .submenu .context .subtext,
+.xmb-contents .submenu .context .subtext2 {
+  position: static !important;
+  margin: 0 !important;
+  text-align: left;
+  line-height: 1.2;
+}
+
+.xmb-contents .submenu .context .item-title {
+  font-size: 1.35rem;
+  animation: none;
+}
+
+.xmb-contents .submenu.active .context .item-title {
+  animation: glow 1s ease-in-out infinite alternate;
+}
+
+.xmb-contents .submenu .context .subtext {
+  font-size: 0.95rem !important;
+}
+
+.xmb-contents .submenu .context .subtext2 {
+  font-size: 0.78rem !important;
+  opacity: 0.85;
+}
