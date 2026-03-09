@@ -754,7 +754,7 @@ body.app-ready {
 
 .xmb-title.active .xmb-contents .context {
   min-width: 0 !important;
-  max-width: 340px;
+  max-width: 520px;
   text-align: left;
   align-items: flex-start;
 }
@@ -793,4 +793,11 @@ body.app-ready {
   opacity: 0.85 !important;
   visibility: visible;
   max-height: 80px;
+}
+
+
+/* Widen text boxes to use the available horizontal space */
+.xmb-title.active .xmb-contents .submenu .context {
+  min-width: 420px;
+  max-width: 560px !important;
 }
