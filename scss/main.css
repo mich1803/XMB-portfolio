@@ -613,3 +613,22 @@ body {
   padding: 20px 0px;
   margin-top: -10px;
 }/*# sourceMappingURL=main.css.map */
+/* Portfolio customizations */
+body {
+  opacity: 0;
+  transition: opacity 450ms ease-in;
+}
+
+body.app-ready {
+  opacity: 1;
+}
+
+.back-vid,
+#menu,
+.clock {
+  transition-duration: 450ms;
+}
+
+.xmb-contents .submenu {
+  cursor: pointer;
+}
