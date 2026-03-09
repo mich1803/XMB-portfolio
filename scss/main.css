@@ -719,3 +719,30 @@ body.app-ready {
   font-size: 0.78rem !important;
   opacity: 0.85;
 }
+
+/* Final alignment/glow fixes requested */
+.xmb-title.active .xmb-contents {
+  margin-left: 0 !important;
+  transform: none !important;
+  min-width: 460px;
+}
+
+.xmb-title.active .xmb-contents .submenu {
+  margin-left: 0 !important;
+}
+
+.xmb-title.active .xmb-contents .submenu img {
+  margin-left: 0 !important;
+}
+
+.xmb-title.active .xmb-contents .submenu .context {
+  margin-left: 12px;
+}
+
+.xmb-contents .submenu .context .item-title {
+  text-shadow: 0 0 2px #d6d6d6, 0 0 4px #bfbfbf, 0 0 8px #9f9f9f;
+}
+
+.xmb-contents .submenu.active .context .item-title {
+  animation: glow 1s ease-in-out infinite alternate !important;
+}

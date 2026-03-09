@@ -17,7 +17,7 @@ const playNavSound = () => {
 const moveMenu = (index) => {
   const width = document.body.clientWidth;
   const offsets = [
-    ['-40%', '0', '0'],
+    ['-28%', '8%', '8%'],
     ['-10%', '18%', '18%'],
     ['22%', '32%', '39%'],
     ['50%', '47%', '60%'],
