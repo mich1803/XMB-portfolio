@@ -801,3 +801,9 @@ body.app-ready {
   min-width: 420px;
   max-width: 560px !important;
 }
+
+/* Fix: force visible wider text box on selected item */
+.xmb-title.active .xmb-contents .submenu.active .context {
+  width: min(560px, 52vw) !important;
+  min-width: 420px !important;
+}
