@@ -29,6 +29,19 @@ const moveMenu = (index) => {
   else xmbMain.style.marginRight = fullHd;
 };
 
+
+const syncActiveSubmenuAlignment = () => {
+  const activeSection = sections[sectionIndex];
+  if (!activeSection) return;
+
+  const sectionIcon = activeSection.querySelector(':scope > img');
+  const firstSubmenuIcon = activeSection.querySelector('.submenu img');
+  if (!sectionIcon || !firstSubmenuIcon) return;
+
+  const deltaX = sectionIcon.getBoundingClientRect().left - firstSubmenuIcon.getBoundingClientRect().left;
+  activeSection.style.setProperty('--submenu-align-shift', `${deltaX}px`);
+};
+
 const updateSubmenuState = () => {
   const currentSubmenus = Array.from(sections[sectionIndex].querySelectorAll('.submenu'));
   subsectionIndex = Math.min(subsectionIndex, currentSubmenus.length - 1);
@@ -51,6 +64,7 @@ const updateSectionState = () => {
   });
   moveMenu(sectionIndex);
   updateSubmenuState();
+  requestAnimationFrame(syncActiveSubmenuAlignment);
 };
 
 const setSection = (newIndex) => {
@@ -119,4 +133,8 @@ window.addEventListener('load', () => {
 
   updateSectionState();
   registerPointerNavigation();
+});
+
+window.addEventListener('resize', () => {
+  requestAnimationFrame(syncActiveSubmenuAlignment);
 });

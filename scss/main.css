@@ -858,3 +858,8 @@ body.app-ready {
   max-width: 720px !important;
   margin-left: 0 !important;
 }
+
+/* Runtime left-edge lock: submenu icon column snaps to selected section icon left edge */
+.xmb-title.active .xmb-contents .submenu {
+  transform: translateX(var(--submenu-align-shift, 0px));
+}
