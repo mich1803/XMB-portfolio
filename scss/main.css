@@ -807,3 +807,26 @@ body.app-ready {
   width: min(560px, 52vw) !important;
   min-width: 420px !important;
 }
+
+/* Alignment stabilization: prevent old per-section offsets from pulling active content left */
+.xmb-title.active .xmb-contents {
+  margin-right: 0 !important;
+}
+
+.xmb-title.music.active .xmb-contents,
+.xmb-title.messages.active .xmb-contents,
+.xmb-title.videos.active .xmb-contents,
+.xmb-title.games.active .xmb-contents,
+.xmb-title.settings.active .xmb-contents,
+.xmb-title.homeMenu.active .xmb-contents {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.xmb-title.active .xmb-contents .submenu {
+  margin-left: 112px !important;
+}
+
+.xmb-title.active .xmb-contents .submenu .context {
+  margin-left: 16px !important;
+}
