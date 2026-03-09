@@ -2,25 +2,13 @@
 
 A PS3-style XMB-inspired portfolio site built with vanilla HTML/CSS/JS.
 
-## Acknowledgments
-
-- Original inspiration and base implementation: [menonparik/xmb-on-web](https://github.com/menonparik/xmb-on-web).
-- Huge shout out to **@menonparik** for the original project and to **you** for adapting it into a personal portfolio.
-
-## Copyright and trademark note (Sony / PS3 / XMB)
-
-This repository is an unofficial recreation inspired by the visual style of Sony's PS3 XMB interface.
-
-- "PlayStation", "PS3", and "XMB" are trademarks/copyrighted properties of Sony Interactive Entertainment and related entities.
-- This project is a fan-made, educational/portfolio-oriented interface clone.
-- It is not affiliated with, endorsed by, or sponsored by Sony.
 
 ## Open-source usage
 
 You are free to fork, modify, and use this project as your own academic/professional portfolio.
 
 If you publish a derivative, please give a quick credit/shout out to:
-- mich1803 (me), and
+- [mich1803](https://github.com/mich1803) (me)
 - [menonparik/xmb-on-web](https://github.com/menonparik/xmb-on-web).
 
 ---
@@ -110,8 +98,15 @@ In the `Contacts` section, replace text/links with your profiles:
 
 ---
 
-## Tech stack
+## Acknowledgments
 
-- HTML
-- CSS (compiled from SCSS structure)
-- Vanilla JavaScript
+- Original inspiration and base implementation: [menonparik/xmb-on-web](https://github.com/menonparik/xmb-on-web).
+- Huge shout out to **@menonparik** for the original project.
+
+## Copyright and trademark note (Sony / PS3 / XMB)
+
+This repository is an unofficial recreation inspired by the visual style of Sony's PS3 XMB interface.
+
+- "PlayStation", "PS3", and "XMB" are trademarks/copyrighted properties of Sony Interactive Entertainment and related entities.
+- This project is a fan-made, educational/portfolio-oriented interface clone.
+- It is not affiliated with, endorsed by, or sponsored by Sony.
