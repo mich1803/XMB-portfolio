@@ -80,7 +80,7 @@ body {
 }
 
 .xmb-title {
-  transition: scale 300ms;
+  transition: transform 280ms ease, scale 300ms;
   z-index: 2;
 }
 .xmb-title img {
@@ -781,15 +781,7 @@ body.app-ready {
   margin-left: 16px !important;
 }
 
-/* Requested update: wider open content + hide subtext2 unless selected */
-.xmb-title.active .xmb-contents {
-  min-width: 520px !important;
-}
-
-.xmb-title.active .xmb-contents .context {
-  max-width: 430px;
-}
-
+/* Requested update: hide subtext2 unless selected */
 .xmb-contents .submenu .context .subtext2 {
   opacity: 0 !important;
   visibility: hidden;
