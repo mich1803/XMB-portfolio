@@ -771,3 +771,12 @@ body.app-ready {
 .xmb-title.active .xmb-contents .submenu .context {
   margin-left: 18px !important;
 }
+
+/* Requested final alignment: shift about area right + align item icons under section icons */
+.xmb-title.active .xmb-contents .submenu {
+  margin-left: 112px !important;
+}
+
+.xmb-title.active .xmb-contents .submenu .context {
+  margin-left: 16px !important;
+}
