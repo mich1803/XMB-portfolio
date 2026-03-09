@@ -758,3 +758,16 @@ body.app-ready {
   text-align: left;
   align-items: flex-start;
 }
+
+/* Final requested nudge: move leftmost section and items to the right */
+.xmb-title.homeMenu.active .xmb-contents {
+  margin-left: 14px !important;
+}
+
+.xmb-title.active .xmb-contents .submenu {
+  margin-left: 12px !important;
+}
+
+.xmb-title.active .xmb-contents .submenu .context {
+  margin-left: 18px !important;
+}
