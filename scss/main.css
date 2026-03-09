@@ -80,7 +80,7 @@ body {
 }
 
 .xmb-title {
-  transition: scale 300ms;
+  transition: transform 280ms ease, scale 300ms;
   z-index: 2;
 }
 .xmb-title img {
@@ -631,4 +631,235 @@ body.app-ready {
 
 .xmb-contents .submenu {
   cursor: pointer;
+}
+
+/* Requested refinements: wider open section + 3 info levels */
+.xmb-title.active .xmb-contents {
+  margin-left: 28px !important;
+  min-width: 520px;
+}
+
+.xmb-title.active .xmb-contents .context {
+  min-width: 430px;
+}
+
+.xmb-contents .context .subtext {
+  margin-top: 6px;
+  font-size: 0.95rem !important;
+  line-height: 1.2;
+}
+
+.xmb-contents .context .subtext2 {
+  margin-top: 4px;
+  font-size: 0.78rem !important;
+  opacity: 0.9;
+  line-height: 1.2;
+}
+
+.xmb-title.settings .xmb-contents .submenu .context .subtext {
+  position: absolute;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.xmb-title.settings .xmb-contents .submenu .context .subtext2 {
+  position: absolute;
+  margin-left: 10px;
+  margin-top: 28px;
+  opacity: 0;
+}
+
+.xmb-title.settings .xmb-contents .submenu.two.active .context .subtext2,
+.xmb-title.settings .xmb-contents .submenu.three.active .context .subtext2,
+.xmb-title.settings .xmb-contents .submenu.one .context .subtext2 {
+  opacity: 1;
+}
+
+.xmb-title.settings .xmb-contents .submenu.one.inactive .context .subtext2 {
+  opacity: 0;
+}
+
+/* Fix title/subtext stacking and section horizontal alignment */
+.xmb-title.active .xmb-contents {
+  margin-left: 0 !important;
+  transform: translateX(-26px);
+  min-width: 500px;
+}
+
+.xmb-contents .submenu .context {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
+}
+
+.xmb-contents .submenu .context .item-title,
+.xmb-contents .submenu .context .subtext,
+.xmb-contents .submenu .context .subtext2 {
+  position: static !important;
+  margin: 0 !important;
+  text-align: left;
+  line-height: 1.2;
+}
+
+.xmb-contents .submenu .context .item-title {
+  font-size: 1.35rem;
+  animation: none;
+}
+
+.xmb-contents .submenu.active .context .item-title {
+  animation: glow 1s ease-in-out infinite alternate;
+}
+
+.xmb-contents .submenu .context .subtext {
+  font-size: 0.95rem !important;
+}
+
+.xmb-contents .submenu .context .subtext2 {
+  font-size: 0.78rem !important;
+  opacity: 0.85;
+}
+
+/* Final alignment/glow fixes requested */
+.xmb-title.active .xmb-contents {
+  margin-left: 0 !important;
+  transform: none !important;
+  min-width: 460px;
+}
+
+.xmb-title.active .xmb-contents .submenu {
+  margin-left: 0 !important;
+}
+
+.xmb-title.active .xmb-contents .submenu img {
+  margin-left: 0 !important;
+}
+
+.xmb-title.active .xmb-contents .submenu .context {
+  margin-left: 12px;
+}
+
+.xmb-contents .submenu .context .item-title {
+  text-shadow: 0 0 2px #d6d6d6, 0 0 4px #bfbfbf, 0 0 8px #9f9f9f;
+}
+
+.xmb-contents .submenu.active .context .item-title {
+  animation: glow 1s ease-in-out infinite alternate !important;
+}
+
+/* Left-edge visibility + left-anchored text block refinement */
+.xmb-title.active .xmb-contents {
+  min-width: 360px !important;
+}
+
+.xmb-title.active .xmb-contents .context {
+  min-width: 0 !important;
+  max-width: 520px;
+  text-align: left;
+  align-items: flex-start;
+}
+
+/* Final requested nudge: move leftmost section and items to the right */
+.xmb-title.homeMenu.active .xmb-contents {
+  margin-left: 14px !important;
+}
+
+.xmb-title.active .xmb-contents .submenu {
+  margin-left: 12px !important;
+}
+
+.xmb-title.active .xmb-contents .submenu .context {
+  margin-left: 18px !important;
+}
+
+/* Requested final alignment: shift about area right + align item icons under section icons */
+.xmb-title.active .xmb-contents .submenu {
+  margin-left: 112px !important;
+}
+
+.xmb-title.active .xmb-contents .submenu .context {
+  margin-left: 16px !important;
+}
+
+/* Requested update: hide subtext2 unless selected */
+.xmb-contents .submenu .context .subtext2 {
+  opacity: 0 !important;
+  visibility: hidden;
+  max-height: 0;
+  overflow: hidden;
+}
+
+.xmb-contents .submenu.active .context .subtext2 {
+  opacity: 0.85 !important;
+  visibility: visible;
+  max-height: 80px;
+}
+
+
+/* Widen text boxes to use the available horizontal space */
+.xmb-title.active .xmb-contents .submenu .context {
+  min-width: 420px;
+  max-width: 560px !important;
+}
+
+/* Fix: force visible wider text box on selected item */
+.xmb-title.active .xmb-contents .submenu.active .context {
+  width: min(560px, 52vw) !important;
+  min-width: 420px !important;
+}
+
+/* Alignment stabilization: prevent old per-section offsets from pulling active content left */
+.xmb-title.active .xmb-contents {
+  margin-right: 0 !important;
+}
+
+.xmb-title.music.active .xmb-contents,
+.xmb-title.messages.active .xmb-contents,
+.xmb-title.videos.active .xmb-contents,
+.xmb-title.games.active .xmb-contents,
+.xmb-title.settings.active .xmb-contents,
+.xmb-title.homeMenu.active .xmb-contents {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.xmb-title.active .xmb-contents .submenu {
+  margin-left: 112px !important;
+}
+
+.xmb-title.active .xmb-contents .submenu .context {
+  margin-left: 16px !important;
+}
+
+
+/* Final layout model: icon column aligned to selected section + wide content block */
+.xmb-title.active .xmb-contents {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.xmb-title.active .xmb-contents .submenu {
+  display: grid;
+  grid-template-columns: 96px minmax(520px, 720px);
+  column-gap: 18px;
+  align-items: start;
+  margin-left: 0 !important;
+}
+
+.xmb-title.active .xmb-contents .submenu img {
+  width: 96px;
+  height: auto;
+  margin-left: 0 !important;
+}
+
+.xmb-title.active .xmb-contents .submenu .context {
+  width: 100% !important;
+  min-width: 520px !important;
+  max-width: 720px !important;
+  margin-left: 0 !important;
+}
+
+/* Runtime left-edge lock: submenu icon column snaps to selected section icon left edge */
+.xmb-title.active .xmb-contents .submenu {
+  transform: translateX(var(--submenu-align-shift, 0px));
 }

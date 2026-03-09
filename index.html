@@ -12,84 +12,95 @@
     <audio id="nav" src="audio/nav.mp3" type="audio/mpeg"></audio>
     <video autoplay loop muted plays-inline class="back-vid" id="vid" src="images/vid.mp4" type="video/mp4"></video>
 
-    <section class="clock">
-        <div class="clock-container">
-            <p id="date"></p>
-        </div>
-    </section>
+    <!-- MAIN MENU-->
 
     <main id="menu">
         <section class="xmb-main">
             <div class="xmb-title homeMenu active">
                 <img class="home" src="images/user.png" alt="About">
-                <p class="titletext">About</p>
+                <p class="titletext">About Me</p>
                 <div class="xmb-contents">
                     <div class="submenu one">
                         <img class="abimg" src="images/user.png" alt="Photo and bio">
                         <div class="context">
-                            <p id="about">Photo and Bio</p>
-                            <p class="subtext">Add your portrait, short biography, interests, and current role.</p>
+                            <p class="item-title">Michele Magrini</p>
+                            <p class="subtext">ML Student Researcher</p>
+                            <p class="subtext2">MSc in Applied Mathematics for AI</p>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- EDUCATION-->
 
             <div class="xmb-title settings">
                 <img class="settings" src="images/settings.png" alt="Education">
                 <p class="titletext">Education</p>
                 <div class="xmb-contents">
                     <div class="submenu one">
-                        <img class="abimg" src="images/update.png" alt="High school">
+                        <img class="abimg" src="images/update.png" alt="Masters">
                         <div class="context">
-                            <p id="about">High School</p>
-                            <p class="subtext">Institution · Degree · Field of Study · Description</p>
+                            <p class="item-title">MSc in Applied Mathematics</p>
+                            <p class="subtext">La Sapienza (Rome), Master's Degree, 2025 - Present</p>
+                            <p class="subtext2">Building advanced expertise in AI with a strong mathematical foundation. Focused on deep learning, generative models, and NLP, supported by rigorous training in statistical inference and mathematical modeling. Applying these methods to complex systems, physics-informed learning, and emerging areas such as quantum AI.</p>
                         </div>
                     </div>
                     <div class="submenu two">
                         <img class="resimg" src="images/display.png" alt="Bachelors">
                         <div class="context">
-                            <p id="twotext">Bachelor's Degree</p>
-                            <p class="subtext">Institution · Degree · Field of Study · Description</p>
+                            <p class="item-title">BSc in Mathematics for AI</p>
+                            <p class="subtext">La Sapienza (Rome), Bachelor's Degree, 2022 - 2025</p>
+                            <p class="subtext2">Built a strong foundation in artificial intelligence through coursework in machine learning, data analysis, and mathematical modeling. Applied theoretical knowledge in projects involving optimization algorithms, algorithmic decision-making, and database systems.</p>
                         </div>
                     </div>
                     <div class="submenu three">
-                        <img class="sysimg" src="images/display.png" alt="Masters">
+                        <img class="sysimg" src="images/display.png" alt="High School">
                         <div class="context">
-                            <p id="systext">Master's Degree</p>
-                            <p class="subtext">Institution · Degree · Field of Study · Description</p>
+                            <p class="item-title">HS Diploma in Computer Science</p>
+                            <p class="subtext">ITIS Trafelli (Nettuno), High School, 2017 - 2022</p>
+                            <p class="subtext2">Foundational experience in electronics, telecommunications, networking, and software development (front-end and back-end).</p>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- EXPERIENCE -->
 
             <div class="xmb-title messages">
                 <img class="messages" src="images/photo.png" alt="Experience">
                 <p class="titletext">Experience</p>
                 <div class="xmb-contents">
                     <div class="submenu one">
-                        <img class="abimg" src="images/photo.png" alt="Experience placeholder">
+                        <img class="abimg" src="images/photo.png" alt="Experience">
                         <div class="context">
-                            <p id="about">Experience Placeholder</p>
-                            <p class="subtext">Title · Company</p>
+                            <p class="item-title">Machine Learning Researcher</p>
+                            <p class="subtext">Sensichips SRL, 2025 - Present</p>
+                            <p class="subtext2">Design and optimization of machine learning models and algorithms for embedded, low-power, and resource-constrained environments.</p>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- RESEARCH -->
 
             <div class="xmb-title music">
                 <img class="messages" src="images/music.png" alt="Research">
                 <p class="titletext">Research</p>
                 <div class="xmb-contents">
                     <div class="submenu one">
-                        <img class="abimg" src="images/music.png" alt="Research placeholder">
+                        <img class="abimg" src="images/music.png" alt="Research">
                         <div class="context">
-                            <p id="about">Research Placeholder</p>
-                            <p class="subtext">Title · Authors · Short Description · Keywords · DOI</p>
+                            <p class="item-title">Explainable CNN for Earthquake Phase Classification</p>
+                            <p class="subtext">M. Magrini et al. 2026 (XAI, Seismology)</p>
+                            <p class="subtext2">RGB spectrogram CNN with SHAP can reveal time-frequency features linked to fault-zone evolution.</p>
                         </div>
                     </div>
                 </div>
             </div>
 
+            <!-- SIDE PROJECTS -->
+
+            <!--
             <div class="xmb-title videos">
                 <img class="messages" src="images/video.png" alt="Side projects">
                 <p class="titletext">Side Projects</p>
@@ -97,22 +108,60 @@
                     <div class="submenu one">
                         <img class="abimg" src="images/youtube.png" alt="Side project placeholder">
                         <div class="context">
-                            <p id="about">Side Project Placeholder</p>
-                            <p class="subtext">Title · Short Description · Keywords · Repository Link</p>
+                            <p class="item-title">Side Project Placeholder</p>
+                            <p class="subtext">Title · Keywords</p>
+                            <p class="subtext2">Short description · repo/demo link.</p>
                         </div>
                     </div>
                 </div>
             </div>
+            -->
+
+            <!-- CONTACTS -->
 
             <div class="xmb-title games">
                 <img class="messages" src="images/games.png" alt="Contacts">
                 <p class="titletext">Contacts</p>
                 <div class="xmb-contents">
+
                     <div class="submenu one">
                         <img class="abimg" src="images/uncharted.png" alt="Contact links">
                         <div class="context">
-                            <p id="about">Find Me Online</p>
-                            <p class="subtext">GitHub · LinkedIn · ORCID · Google Scholar · Instagram</p>
+                            <p class="item-title">E-Mail</p>
+                            <p class="subtext"><a href="mailto:michelemagrini2003@gmail.com">michelemagrini2003@gmail.com</a></p>
+                        </div>
+                    </div>
+
+                    <div class="submenu two">
+                        <img class="abimg" src="images/uncharted.png" alt="Contact links">
+                        <div class="context">
+                            <p class="item-title">Github</p>
+                            <p class="subtext"><a href="https://github.com/mich1803" target="_blank">github.com/mich1803</a></p>
+                            <p class="subtext2">Google Scholar · Instagram · (add email if needed).</p>
+                        </div>
+                    </div>
+
+                    <div class="submenu three">
+                        <img class="abimg" src="images/uncharted.png" alt="Contact links">
+                        <div class="context">
+                            <p class="item-title">Google Scholar</p>
+                            <p class="subtext"><a href="https://scholar.google.com/citations?user=XXXXXXXXXXX&hl=en" target="_blank">Michele Magrini</a></p>
+                        </div>
+                    </div>
+
+                    <div class="submenu four">
+                        <img class="abimg" src="images/uncharted.png" alt="Contact links">
+                        <div class="context">
+                            <p class="item-title">LinkedIn</p>
+                            <p class="subtext"><a href="https://www.linkedin.com/in/michele-magrini/" target="_blank">linkedin.com/in/michele-magrini/</a></p>
+                        </div>
+                    </div>
+
+                    <div class="submenu five">
+                        <img class="abimg" src="images/uncharted.png" alt="Contact links">
+                        <div class="context">
+                            <p class="item-title">Instagram</p>
+                            <p class="subtext"><a href="https://www.instagram.com/michelemagrini_/" target="_blank">@michelemagrini_</a></p>
                         </div>
                     </div>
                 </div>
@@ -121,3 +170,4 @@
     </main>
 </body>
 </html>
+

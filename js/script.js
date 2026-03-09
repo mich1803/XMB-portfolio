@@ -1,7 +1,5 @@
 const video = document.getElementById('vid');
 const menu = document.getElementById('menu');
-const clockSection = document.querySelector('.clock');
-const dateTime = document.getElementById('date');
 const xmbMain = document.querySelector('.xmb-main');
 const sections = Array.from(document.querySelectorAll('.xmb-title'));
 const navSound = document.getElementById('nav');
@@ -17,7 +15,7 @@ const playNavSound = () => {
 const moveMenu = (index) => {
   const width = document.body.clientWidth;
   const offsets = [
-    ['-40%', '0', '0'],
+    ['-26%', '-12%', '-12%'],
     ['-10%', '18%', '18%'],
     ['22%', '32%', '39%'],
     ['50%', '47%', '60%'],
@@ -29,6 +27,19 @@ const moveMenu = (index) => {
   if (width < 1400) xmbMain.style.marginRight = hd;
   else if (width >= 2560 && width <= 3840) xmbMain.style.marginRight = ultraHd;
   else xmbMain.style.marginRight = fullHd;
+};
+
+
+const syncActiveSubmenuAlignment = () => {
+  const activeSection = sections[sectionIndex];
+  if (!activeSection) return;
+
+  const sectionIcon = activeSection.querySelector(':scope > img');
+  const firstSubmenuIcon = activeSection.querySelector('.submenu img');
+  if (!sectionIcon || !firstSubmenuIcon) return;
+
+  const deltaX = sectionIcon.getBoundingClientRect().left - firstSubmenuIcon.getBoundingClientRect().left;
+  activeSection.style.setProperty('--submenu-align-shift', `${deltaX}px`);
 };
 
 const updateSubmenuState = () => {
@@ -49,16 +60,11 @@ const updateSubmenuState = () => {
 const updateSectionState = () => {
   sections.forEach((section, idx) => {
     section.classList.toggle('active', idx === sectionIndex);
+    section.style.transform = idx > sectionIndex ? 'translateX(160px)' : 'translateX(0)';
   });
   moveMenu(sectionIndex);
   updateSubmenuState();
-};
-
-const sideClock = () => {
-  const d = new Date();
-  const minutes = String(d.getMinutes()).padStart(2, '0');
-  const clock = `${d.getDate()}/${d.getMonth() + 1} ${d.getHours()}:${minutes}`;
-  dateTime.innerText = clock;
+  requestAnimationFrame(syncActiveSubmenuAlignment);
 };
 
 const setSection = (newIndex) => {
@@ -123,11 +129,12 @@ window.addEventListener('load', () => {
   video.play().catch(() => {});
   video.style.opacity = '1';
   menu.style.opacity = '1';
-  clockSection.style.opacity = '1';
   document.body.classList.add('app-ready');
 
-  sideClock();
-  setInterval(sideClock, 1000);
   updateSectionState();
   registerPointerNavigation();
+});
+
+window.addEventListener('resize', () => {
+  requestAnimationFrame(syncActiveSubmenuAlignment);
 });
