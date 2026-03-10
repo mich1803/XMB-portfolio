@@ -30,6 +30,18 @@ const moveMenu = (index) => {
 };
 
 
+const getActiveSubmenu = () => sections[sectionIndex]?.querySelectorAll('.submenu')[subsectionIndex] ?? null;
+
+const openEnterableFromSubmenu = (submenu) => {
+  if (!submenu) return false;
+
+  const url = submenu.dataset.enterUrl || submenu.querySelector('a[href]')?.href;
+  if (!url) return false;
+
+  window.open(url, '_blank', 'noopener,noreferrer');
+  return true;
+};
+
 const syncActiveSubmenuAlignment = () => {
   const activeSection = sections[sectionIndex];
   if (!activeSection) return;
@@ -68,7 +80,10 @@ const updateSectionState = () => {
 };
 
 const setSection = (newIndex) => {
-  sectionIndex = Math.max(0, Math.min(newIndex, sections.length - 1));
+  const boundedIndex = Math.max(0, Math.min(newIndex, sections.length - 1));
+  if (boundedIndex === sectionIndex) return;
+
+  sectionIndex = boundedIndex;
   subsectionIndex = 0;
   updateSectionState();
 };
@@ -122,6 +137,14 @@ document.body.addEventListener('keydown', (e) => {
     e.preventDefault();
     playNavSound();
     setSection(sectionIndex - 1);
+  } else if (e.key === 'Enter') {
+    const activeSubmenu = getActiveSubmenu();
+    if (!activeSubmenu) return;
+
+    if (openEnterableFromSubmenu(activeSubmenu)) {
+      e.preventDefault();
+      playNavSound();
+    }
   }
 });
 
