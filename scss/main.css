@@ -951,3 +951,10 @@ body.app-ready {
   opacity: 0.5;
   transform: translateY(-18px) translateX(var(--submenu-align-shift, 0px)) scale(0.95);
 }
+
+/* Contacts image-size normalization: override legacy .abimg/.submenu.two scaling */
+.xmb-title.games.active .xmb-contents .submenu img {
+  scale: 1 !important;
+  width: 96px !important;
+  height: auto;
+}
