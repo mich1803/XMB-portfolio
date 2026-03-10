@@ -935,3 +935,19 @@ body.app-ready {
   opacity: 0.5;
   transform: translateY(-18px) translateX(var(--submenu-align-shift, 0px)) scale(0.95);
 }
+
+/* Contacts bugfix: all non-selected rows stay small (including rows below active) */
+.xmb-title.games.active .xmb-contents .submenu {
+  opacity: 0.5;
+  transform: translateY(0) translateX(var(--submenu-align-shift, 0px)) scale(0.95);
+}
+
+.xmb-title.games.active .xmb-contents .submenu.active {
+  opacity: 1;
+  transform: translateY(0) translateX(var(--submenu-align-shift, 0px)) scale(1);
+}
+
+.xmb-title.games.active .xmb-contents .submenu.inactive {
+  opacity: 0.5;
+  transform: translateY(-18px) translateX(var(--submenu-align-shift, 0px)) scale(0.95);
+}
