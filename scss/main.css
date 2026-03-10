@@ -907,3 +907,31 @@ body.app-ready {
   margin-top: 0 !important;
   opacity: 0.58;
 }
+
+/* Contacts section: keep all five rows consistently dynamic while navigating */
+.xmb-title.games.active .xmb-contents {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.xmb-title.games.active .xmb-contents .submenu,
+.xmb-title.games.active .xmb-contents .submenu.one,
+.xmb-title.games.active .xmb-contents .submenu.two,
+.xmb-title.games.active .xmb-contents .submenu.three,
+.xmb-title.games.active .xmb-contents .submenu.four,
+.xmb-title.games.active .xmb-contents .submenu.five {
+  margin-top: 0 !important;
+  padding-bottom: 10px;
+  transition: transform 250ms ease, opacity 200ms ease;
+}
+
+.xmb-title.games.active .xmb-contents .submenu.active {
+  opacity: 1;
+  transform: translateY(0) translateX(var(--submenu-align-shift, 0px)) scale(1);
+}
+
+.xmb-title.games.active .xmb-contents .submenu.inactive {
+  opacity: 0.5;
+  transform: translateY(-18px) translateX(var(--submenu-align-shift, 0px)) scale(0.95);
+}
