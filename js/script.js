@@ -1,7 +1,7 @@
 const video = document.getElementById('vid');
 const menu = document.getElementById('menu');
 const xmbMain = document.querySelector('.xmb-main');
-const sections = Array.from(document.querySelectorAll('.xmb-title'));
+const sections = Array.from(document.querySelectorAll('.xmb-column'));
 const navSound = document.getElementById('nav');
 
 let sectionIndex = 0;
@@ -54,6 +54,66 @@ const syncActiveSubmenuAlignment = () => {
   activeSection.style.setProperty('--submenu-align-shift', `${deltaX}px`);
 };
 
+const resetSubmenuStackLayout = (section) => {
+  const contents = section.querySelector('.xmb-contents');
+  if (contents) contents.style.minHeight = '';
+
+  section.querySelectorAll('.submenu').forEach((submenu) => {
+    submenu.style.position = '';
+    submenu.style.left = '';
+    submenu.style.top = '';
+    submenu.style.marginTop = '';
+    submenu.style.zIndex = '';
+    submenu.style.opacity = '';
+  });
+};
+
+const stackActiveSubmenus = () => {
+  sections.forEach((section, idx) => {
+    const contents = section.querySelector('.xmb-contents');
+    const submenus = Array.from(section.querySelectorAll('.submenu'));
+
+    if (!contents || submenus.length === 0 || idx !== sectionIndex) {
+      resetSubmenuStackLayout(section);
+      return;
+    }
+
+    const sectionIcon = section.querySelector(':scope > img');
+    const activeRect = submenus[subsectionIndex].getBoundingClientRect();
+    const contentsRect = contents.getBoundingClientRect();
+    const iconRect = sectionIcon?.getBoundingClientRect();
+
+    const pinnedTop = iconRect
+      ? Math.max(42, Math.round(iconRect.bottom - contentsRect.top + 12))
+      : 42;
+
+    const tallestRow = Math.max(...submenus.map((submenu) => submenu.getBoundingClientRect().height));
+    const rowStep = Math.max(90, Math.ceil(tallestRow + 16));
+
+    submenus.forEach((submenu, subIdx) => {
+      const submenuRect = submenu.getBoundingClientRect();
+      let top = pinnedTop + ((subIdx - subsectionIndex) * rowStep);
+
+      if (subIdx < subsectionIndex && iconRect) {
+        const nearestSafeTop = iconRect.top - contentsRect.top - submenuRect.height - 14;
+        const slotsAbove = subsectionIndex - 1 - subIdx;
+        top = nearestSafeTop - (slotsAbove * rowStep);
+      }
+
+      submenu.style.position = 'absolute';
+      submenu.style.left = '0';
+      submenu.style.top = `${Math.round(top)}px`;
+      submenu.style.marginTop = '0';
+      submenu.style.zIndex = subIdx === subsectionIndex ? '3' : '2';
+      submenu.style.opacity = subIdx < subsectionIndex ? '0.65' : '1';
+    });
+
+    const lastSubmenu = submenus[submenus.length - 1];
+    const lastTop = parseFloat(lastSubmenu.style.top || '0');
+    contents.style.minHeight = `${Math.ceil(lastTop + activeRect.height + 28)}px`;
+  });
+};
+
 const updateSubmenuState = () => {
   const currentSubmenus = Array.from(sections[sectionIndex].querySelectorAll('.submenu'));
   subsectionIndex = Math.min(subsectionIndex, currentSubmenus.length - 1);
@@ -67,6 +127,8 @@ const updateSubmenuState = () => {
       }
     });
   });
+
+  requestAnimationFrame(stackActiveSubmenus);
 };
 
 const updateSectionState = () => {
@@ -159,5 +221,8 @@ window.addEventListener('load', () => {
 });
 
 window.addEventListener('resize', () => {
-  requestAnimationFrame(syncActiveSubmenuAlignment);
+  requestAnimationFrame(() => {
+    syncActiveSubmenuAlignment();
+    stackActiveSubmenus();
+  });
 });
