@@ -78,17 +78,14 @@ const stackActiveSubmenus = () => {
       return;
     }
 
-    resetSubmenuStackLayout(section);
-
     const sectionIcon = section.querySelector(':scope > img');
-    const firstRect = submenus[0].getBoundingClientRect();
     const activeRect = submenus[subsectionIndex].getBoundingClientRect();
     const contentsRect = contents.getBoundingClientRect();
     const iconRect = sectionIcon?.getBoundingClientRect();
 
-    const naturalTop = firstRect.top - contentsRect.top;
-    const topClearanceFromIcon = iconRect ? (iconRect.bottom - contentsRect.top + 12) : naturalTop;
-    const pinnedTop = Math.max(naturalTop, topClearanceFromIcon, 42);
+    const pinnedTop = iconRect
+      ? Math.max(42, Math.round(iconRect.bottom - contentsRect.top + 12))
+      : 42;
 
     const tallestRow = Math.max(...submenus.map((submenu) => submenu.getBoundingClientRect().height));
     const rowStep = Math.max(90, Math.ceil(tallestRow + 16));
@@ -98,9 +95,9 @@ const stackActiveSubmenus = () => {
       let top = pinnedTop + ((subIdx - subsectionIndex) * rowStep);
 
       if (subIdx < subsectionIndex && iconRect) {
-        const safeTop = iconRect.top - contentsRect.top - submenuRect.height - 14;
-        const depth = subsectionIndex - subIdx - 1;
-        top = Math.min(top, safeTop - (depth * Math.max(36, rowStep * 0.4)));
+        const nearestSafeTop = iconRect.top - contentsRect.top - submenuRect.height - 14;
+        const slotsAbove = subsectionIndex - 1 - subIdx;
+        top = nearestSafeTop - (slotsAbove * rowStep);
       }
 
       submenu.style.position = 'absolute';
