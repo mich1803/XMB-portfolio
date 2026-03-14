@@ -80,6 +80,8 @@ body {
 }
 
 .xmb-title {
+  position: relative;
+  flex: 0 0 auto;
   transition: transform 280ms ease, scale 300ms;
   z-index: 2;
 }
@@ -338,6 +340,10 @@ body {
 }
 
 .xmb-contents {
+  position: absolute;
+  top: calc(100% - 6px);
+  left: 0;
+  width: max-content;
   transition: opacity 300ms ease-in-out;
 }
 .xmb-contents p {
