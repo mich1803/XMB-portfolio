@@ -61,9 +61,13 @@ const updateSubmenuState = () => {
   sections.forEach((section) => {
     section.querySelectorAll('.submenu').forEach((submenu, idx) => {
       submenu.classList.remove('active', 'inactive', 'gotop');
+      submenu.style.removeProperty('--submenu-slide-level');
       if (section === sections[sectionIndex]) {
         if (idx === subsectionIndex) submenu.classList.add('active');
-        else if (idx < subsectionIndex) submenu.classList.add('inactive');
+        else if (idx < subsectionIndex) {
+          submenu.classList.add('inactive', 'gotop');
+          submenu.style.setProperty('--submenu-slide-level', String(subsectionIndex - idx));
+        }
       }
     });
   });
