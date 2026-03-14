@@ -60,13 +60,35 @@ const updateSubmenuState = () => {
 
   sections.forEach((section) => {
     section.querySelectorAll('.submenu').forEach((submenu, idx) => {
+      const context = submenu.querySelector('.context');
+
       submenu.classList.remove('active', 'inactive', 'gotop');
       submenu.style.removeProperty('--submenu-slide-level');
+      submenu.style.removeProperty('transform');
+      submenu.style.removeProperty('opacity');
+      submenu.style.removeProperty('z-index');
+
+      if (context) {
+        context.style.removeProperty('opacity');
+        context.style.removeProperty('pointer-events');
+      }
+
       if (section === sections[sectionIndex]) {
-        if (idx === subsectionIndex) submenu.classList.add('active');
-        else if (idx < subsectionIndex) {
+        if (idx === subsectionIndex) {
+          submenu.classList.add('active');
+          submenu.style.zIndex = '3';
+        } else if (idx < subsectionIndex) {
+          const slideLevel = subsectionIndex - idx;
           submenu.classList.add('inactive', 'gotop');
-          submenu.style.setProperty('--submenu-slide-level', String(subsectionIndex - idx));
+          submenu.style.setProperty('--submenu-slide-level', String(slideLevel));
+          submenu.style.opacity = '0.48';
+          submenu.style.zIndex = String(Math.max(1, 3 - slideLevel));
+          submenu.style.transform = `translateY(calc(-82px - ${slideLevel} * 46px)) translateX(calc(var(--submenu-align-shift, 0px) - 112px)) scale(0.82)`;
+
+          if (context) {
+            context.style.opacity = '0';
+            context.style.pointerEvents = 'none';
+          }
         }
       }
     });
@@ -96,6 +118,7 @@ const setSubsection = (newIndex) => {
   const maxSub = sections[sectionIndex].querySelectorAll('.submenu').length - 1;
   subsectionIndex = Math.max(0, Math.min(newIndex, maxSub));
   updateSubmenuState();
+  requestAnimationFrame(syncActiveSubmenuAlignment);
 };
 
 const registerPointerNavigation = () => {
