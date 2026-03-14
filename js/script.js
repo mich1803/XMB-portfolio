@@ -78,9 +78,10 @@ const stackActiveSubmenus = () => {
       return;
     }
 
+    resetSubmenuStackLayout(section);
+
     const sectionIcon = section.querySelector(':scope > img');
     const firstRect = submenus[0].getBoundingClientRect();
-    const secondRect = submenus[1]?.getBoundingClientRect();
     const activeRect = submenus[subsectionIndex].getBoundingClientRect();
     const contentsRect = contents.getBoundingClientRect();
     const iconRect = sectionIcon?.getBoundingClientRect();
@@ -89,8 +90,8 @@ const stackActiveSubmenus = () => {
     const topClearanceFromIcon = iconRect ? (iconRect.bottom - contentsRect.top + 12) : naturalTop;
     const pinnedTop = Math.max(naturalTop, topClearanceFromIcon, 42);
 
-    const naturalStep = secondRect ? (secondRect.top - firstRect.top) : (activeRect.height + 16);
-    const rowStep = Math.max(90, naturalStep);
+    const tallestRow = Math.max(...submenus.map((submenu) => submenu.getBoundingClientRect().height));
+    const rowStep = Math.max(90, Math.ceil(tallestRow + 16));
 
     submenus.forEach((submenu, subIdx) => {
       const submenuRect = submenu.getBoundingClientRect();
