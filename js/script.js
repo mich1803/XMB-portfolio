@@ -1,7 +1,7 @@
 const video = document.getElementById('vid');
 const menu = document.getElementById('menu');
 const xmbMain = document.querySelector('.xmb-main');
-const sections = Array.from(document.querySelectorAll('.xmb-title'));
+const sections = Array.from(document.querySelectorAll('.xmb-column'));
 const navSound = document.getElementById('nav');
 
 let sectionIndex = 0;
