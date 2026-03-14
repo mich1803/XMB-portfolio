@@ -874,6 +874,11 @@ body.app-ready {
   transform: translateX(var(--submenu-align-shift, 0px));
 }
 
+.xmb-title.active .xmb-contents .submenu.inactive.gotop {
+  opacity: 0.52;
+  transform: translateY(calc(-72px - var(--submenu-slide-level, 1) * 44px)) translateX(var(--submenu-align-shift, 0px)) scale(0.9);
+}
+
 /* 2026 UX polish fixes */
 @keyframes subtleGlow {
   from {
@@ -941,9 +946,14 @@ body.app-ready {
   transform: translateY(0) translateX(var(--submenu-align-shift, 0px)) scale(1);
 }
 
-.xmb-title.games.active .xmb-contents .submenu.inactive {
+.xmb-title.games.active .xmb-contents .submenu.inactive:not(.gotop) {
   opacity: 0.5;
   transform: translateY(-18px) translateX(var(--submenu-align-shift, 0px)) scale(0.95);
+}
+
+.xmb-title.games.active .xmb-contents .submenu.inactive.gotop {
+  opacity: 0.5;
+  transform: translateY(calc(-72px - var(--submenu-slide-level, 1) * 44px)) translateX(var(--submenu-align-shift, 0px)) scale(0.9);
 }
 
 /* Contacts bugfix: all non-selected rows stay small (including rows below active) */
@@ -957,9 +967,14 @@ body.app-ready {
   transform: translateY(0) translateX(var(--submenu-align-shift, 0px)) scale(1);
 }
 
-.xmb-title.games.active .xmb-contents .submenu.inactive {
+.xmb-title.games.active .xmb-contents .submenu.inactive:not(.gotop) {
   opacity: 0.5;
   transform: translateY(-18px) translateX(var(--submenu-align-shift, 0px)) scale(0.95);
+}
+
+.xmb-title.games.active .xmb-contents .submenu.inactive.gotop {
+  opacity: 0.5;
+  transform: translateY(calc(-72px - var(--submenu-slide-level, 1) * 44px)) translateX(var(--submenu-align-shift, 0px)) scale(0.9);
 }
 
 /* Contacts image-size normalization: override legacy .abimg/.submenu.two scaling */
