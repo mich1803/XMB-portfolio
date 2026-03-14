@@ -17,7 +17,13 @@
         font-size: 1.3rem;
 
         &.inactive.gotop{
-            transform: translateY(calc(-60px - (var(--submenu-slide-level) * 45px)));
+            transform: translateY(calc(-82px - (var(--submenu-slide-level) * 46px))) translateX(-112px) scale(0.82);
+            opacity: 0.48;
+
+            .context{
+                opacity: 0;
+                pointer-events: none;
+            }
         }
         
         &.one{
