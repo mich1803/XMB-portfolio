@@ -7,6 +7,9 @@ const navSound = document.getElementById('nav');
 let sectionIndex = 0;
 let subsectionIndex = 0;
 
+const SECTION_TO_SUBMENU_GAP = 12;
+const MIN_SELECTED_TOP = 0;
+
 const playNavSound = () => {
   navSound.currentTime = 0;
   navSound.play().catch(() => {});
@@ -83,9 +86,10 @@ const stackActiveSubmenus = () => {
     const contentsRect = contents.getBoundingClientRect();
     const iconRect = sectionIcon?.getBoundingClientRect();
 
-    const pinnedTop = iconRect
-      ? Math.max(42, Math.round(iconRect.bottom - contentsRect.top + 12))
-      : 42;
+    const iconAnchoredTop = iconRect
+      ? Math.round(iconRect.bottom - contentsRect.top) + SECTION_TO_SUBMENU_GAP
+      : MIN_SELECTED_TOP;
+    const pinnedTop = Math.max(MIN_SELECTED_TOP, iconAnchoredTop);
 
     const tallestRow = Math.max(...submenus.map((submenu) => submenu.getBoundingClientRect().height));
     const rowStep = Math.max(90, Math.ceil(tallestRow + 16));
