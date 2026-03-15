@@ -18,19 +18,22 @@ const playNavSound = () => {
 
 const clamp = (value, min, max) => Math.max(min, Math.min(value, max));
 
-const getResponsiveOffsetProfile = (width) => {
-  if (width < 1400) return { base: -24, step: 24 };
-  if (width >= 2560 && width <= 3840) return { base: -12, step: 15 };
-  return { base: -12, step: 22 };
-};
-
 const moveMenu = (index) => {
-  const sectionCount = sections.length || 1;
   const width = document.body.clientWidth;
-  const { base, step } = getResponsiveOffsetProfile(width);
-  const offset = base + (index * step);
-  const centeredOffset = offset - ((sectionCount - 6) * (step * 0.4));
-  xmbMain.style.marginRight = `${centeredOffset}%`;
+  let start = -12;
+  let step = 22;
+
+  if (width < 1400) {
+    start = -26;
+    step = 16;
+  } else if (width >= 2560 && width <= 3840) {
+    start = -12;
+    step = 15;
+  }
+
+  const offset = start + (index * step);
+  xmbMain.style.transform = 'translateX(0px)';
+  xmbMain.style.marginRight = `${offset}%`;
 };
 
 const getActiveSubmenu = () => sections[sectionIndex]?.querySelectorAll('.submenu')[subsectionIndex] ?? null;
