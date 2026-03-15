@@ -770,11 +770,6 @@ body.app-ready {
   animation: subtleGlow 1.25s ease-in-out infinite alternate !important;
 }
 
-/* Normalize section spacing so selected section is not too far from left neighbors */
-.xmb-main > .xmb-title.xmb-column {
-  margin-left: 34px !important;
-}
-
 /* Prevent submenu rows from collapsing upward and overlapping section icon */
 .xmb-title.active .xmb-contents {
   margin-top: 44px !important;

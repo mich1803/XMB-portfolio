@@ -10,6 +10,8 @@ let subsectionIndex = 0;
 const SECTION_TO_SUBMENU_GAP = 12;
 const MIN_SELECTED_TOP = 0;
 const SUBMENU_INDEX_CLASSES = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
+const MENU_BASE_SHIFT_X = -120;
+const MENU_STEP_SHIFT_X = 190;
 
 const playNavSound = () => {
   navSound.currentTime = 0;
@@ -19,21 +21,9 @@ const playNavSound = () => {
 const clamp = (value, min, max) => Math.max(min, Math.min(value, max));
 
 const moveMenu = (index) => {
-  const width = document.body.clientWidth;
-  let start = -12;
-  let step = 22;
-
-  if (width < 1400) {
-    start = -26;
-    step = 16;
-  } else if (width >= 2560 && width <= 3840) {
-    start = -12;
-    step = 15;
-  }
-
-  const offset = start + (index * step);
-  xmbMain.style.transform = 'translateX(0px)';
-  xmbMain.style.marginRight = `${offset}%`;
+  const shift = MENU_BASE_SHIFT_X - (index * MENU_STEP_SHIFT_X);
+  xmbMain.style.marginRight = '0';
+  xmbMain.style.transform = `translateX(${shift}px)`;
 };
 
 const getActiveSubmenu = () => sections[sectionIndex]?.querySelectorAll('.submenu')[subsectionIndex] ?? null;
