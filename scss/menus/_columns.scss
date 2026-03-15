@@ -1,7 +1,6 @@
 @use "../abstract/" as *;
 
 .xmb-main > .xmb-title.xmb-column[data-section="about"] {
-    transition: margin-left 200ms;
     @include displayInactive;
 
     &.active {

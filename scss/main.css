@@ -65,7 +65,6 @@ body {
 }
 
 .xmb-main > .xmb-title.xmb-column[data-section="about"] {
-  transition: margin-left 200ms;
 }
 .xmb-main > .xmb-title.xmb-column[data-section="about"] img {
   scale: 0.8;
@@ -774,10 +773,6 @@ body.app-ready {
 /* Normalize section spacing so selected section is not too far from left neighbors */
 .xmb-main > .xmb-title.xmb-column {
   margin-left: 34px !important;
-}
-
-.xmb-main > .xmb-title.xmb-column[data-section="about"] {
-  margin-left: 0 !important;
 }
 
 /* Prevent submenu rows from collapsing upward and overlapping section icon */
