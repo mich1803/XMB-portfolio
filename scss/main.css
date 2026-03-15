@@ -777,11 +777,11 @@ body.app-ready {
 }
 
 /* Normalize section spacing so selected section is not too far from left neighbors */
-.xmb-main .xmb-title {
+.xmb-main > .xmb-title.xmb-column {
   margin-left: 34px !important;
 }
 
-.xmb-main .xmb-main > .xmb-title.xmb-column[data-section="about"] {
+.xmb-main > .xmb-title.xmb-column[data-section="about"] {
   margin-left: 0 !important;
 }
 
