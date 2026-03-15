@@ -36,10 +36,6 @@
                 @include scrollDown;
                 margin-top: -270px;
                 transition: all 250ms ease, opacity 200ms ease;
-                .about-bg{
-                    opacity: 0;
-                }
-
                 #about{
                     animation: none;
                 }

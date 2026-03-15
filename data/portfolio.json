@@ -1,0 +1,133 @@
+{
+  "sections": [
+    {
+      "id": "about",
+      "title": "About Me",
+      "icon": "images/new_user.png",
+      "iconClass": "home",
+      "active": true,
+      "items": [
+        {
+          "title": "Michele Magrini",
+          "subtext": "ML Student Researcher",
+          "subtext2": "MSc in Applied Mathematics for AI",
+          "image": "images/propic.png",
+          "imageClass": "abimg"
+        }
+      ]
+    },
+    {
+      "id": "education",
+      "title": "Education",
+      "icon": "images/graduation.png",
+      "iconClass": "settings",
+      "items": [
+        {
+          "title": "MSc in Applied Mathematics (AI)",
+          "subtext": "La Sapienza (Rome), Master's Degree, 2025 - Present",
+          "subtext2": "Building advanced expertise in AI with a strong mathematical foundation. Focused on deep learning, generative models, and NLP, supported by rigorous training in statistical inference and mathematical modeling. Applying these methods to complex systems, physics-informed learning, and emerging areas such as quantum AI.",
+          "image": "images/graph.png",
+          "imageClass": "abimg"
+        },
+        {
+          "title": "BSc in Mathematics for AI",
+          "subtext": "La Sapienza (Rome), Bachelor's Degree, 2022 - 2025",
+          "subtext2": "Built a strong foundation in artificial intelligence through coursework in machine learning, data analysis, and mathematical modeling. Applied theoretical knowledge in projects involving optimization algorithms, algorithmic decision-making, and database systems.",
+          "image": "images/math.png",
+          "imageClass": "resimg"
+        },
+        {
+          "title": "HS Diploma in Computer Science",
+          "subtext": "ITIS Trafelli (Nettuno), High School, 2017 - 2022",
+          "subtext2": "Foundational experience in electronics, telecommunications, networking, and software development (front-end and back-end).",
+          "image": "images/pc.png",
+          "imageClass": "sysimg"
+        }
+      ]
+    },
+    {
+      "id": "experience",
+      "title": "Experience",
+      "icon": "images/experience.png",
+      "iconClass": "messages",
+      "items": [
+        {
+          "title": "Machine Learning Researcher",
+          "subtext": "Sensichips SRL, 2025 - Present",
+          "subtext2": "Design and optimization of machine learning models and algorithms for embedded, low-power, and resource-constrained environments.",
+          "image": "images/chip.png",
+          "imageClass": "abimg"
+        }
+      ]
+    },
+    {
+      "id": "research",
+      "title": "Research",
+      "icon": "images/research.png",
+      "iconClass": "messages",
+      "items": [
+        {
+          "title": "Explainable CNN for Earthquake Phase Classification",
+          "subtext": "M. Magrini et al. 2026 (XAI, Seismology)",
+          "subtext2": "RGB spectrogram CNN with SHAP can reveal time-frequency features linked to fault-zone evolution.",
+          "image": "images/eq.png",
+          "imageClass": "abimg",
+          "enterUrl": "https://doi.org/10.1007/978-3-032-10185-3_25"
+        }
+      ]
+    },
+    {
+      "id": "contacts",
+      "title": "Contacts",
+      "icon": "images/contacts.png",
+      "iconClass": "messages",
+      "items": [
+        {
+          "title": "E-Mail",
+          "image": "images/mail.png",
+          "imageClass": "abimg",
+          "link": {
+            "text": "michelemagrini2003@gmail.com",
+            "href": "mailto:michelemagrini2003@gmail.com"
+          }
+        },
+        {
+          "title": "GitHub",
+          "image": "images/github.png",
+          "imageClass": "abimg",
+          "link": {
+            "text": "mich1803",
+            "href": "https://github.com/mich1803"
+          }
+        },
+        {
+          "title": "Google Scholar",
+          "image": "images/graduation.png",
+          "imageClass": "abimg",
+          "link": {
+            "text": "Michele Magrini",
+            "href": "https://scholar.google.com/citations?user=_gx5hKUAAAAJ&hl=it"
+          }
+        },
+        {
+          "title": "LinkedIn",
+          "image": "images/linkedin.png",
+          "imageClass": "abimg",
+          "link": {
+            "text": "linkedin.com/in/michele-magrini/",
+            "href": "https://www.linkedin.com/in/michele-magrini/"
+          }
+        },
+        {
+          "title": "Instagram",
+          "image": "images/ig.png",
+          "imageClass": "abimg",
+          "link": {
+            "text": "@michelemagrini_",
+            "href": "https://www.instagram.com/michelemagrini_/"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,129 @@
+@use "../abstract/" as *;
+
+.xmb-main > .xmb-title.xmb-column[data-section="education"] {
+    .xmb-contents {
+        .submenu {
+            &.one {
+                margin-top: 50px;
+                margin-bottom: 20px;
+
+                #about {
+                    @include subTitleStyling;
+                }
+
+                .subtext {
+                    @include subTextStyling;
+                }
+
+                &.inactive {
+                    @include scrollDown;
+
+                    &.gotop {
+                        margin-top: -350px;
+                    }
+                }
+            }
+
+            &.two {
+                #disptext {
+                    @include subTitleStyling;
+                }
+
+                .subtext {
+                    @include subTextStyling;
+                    opacity: 0;
+                }
+
+                &.active {
+                    margin-top: 180px;
+                    padding-bottom: 30px;
+
+                    #disptext {
+                        @include glowKeyframes;
+                    }
+
+                    .subtext {
+                        opacity: 1;
+                    }
+                }
+            }
+
+            &.three {
+                margin-top: -10px;
+
+                .subtext {
+                    opacity: 0;
+                    @include subTextStyling;
+                }
+
+                #systext {
+                    @include subTitleStyling;
+                }
+
+                img {
+                    scale: 0.7;
+                }
+
+                &.active {
+                    margin-top: 190px;
+
+                    img {
+                        scale: 1;
+                    }
+
+                    #systext {
+                        @include glowKeyframes;
+                    }
+
+                    .subtext {
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.xmb-main > .xmb-title.xmb-column[data-section="experience"] {
+    .xmb-contents {
+        margin-top: 15px;
+        margin-left: 40px;
+
+        .submenu.one {
+            padding-bottom: 20px;
+        }
+    }
+}
+
+.xmb-main > .xmb-title.xmb-column[data-section="research"] {
+    .xmb-contents {
+        margin-right: 25px !important;
+
+        .submenu.one {
+            margin-left: 10px;
+            padding-bottom: 20px;
+        }
+    }
+}
+
+.xmb-main > .xmb-title.xmb-column[data-section="projects"] {
+    .xmb-contents {
+        margin-left: 10px;
+
+        .submenu.one {
+            padding-bottom: 20px;
+        }
+    }
+}
+
+.xmb-main > .xmb-title.xmb-column[data-section="contacts"] {
+    .xmb-contents {
+        margin-top: 70px;
+        margin-left: 10px;
+        margin-right: 0 !important;
+
+        .submenu.one {
+            padding-bottom: 20px;
+        }
+    }
+}
