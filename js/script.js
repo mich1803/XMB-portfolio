@@ -1,37 +1,37 @@
 const video = document.getElementById('vid');
 const menu = document.getElementById('menu');
-const xmbMain = document.querySelector('.xmb-main');
-const sections = Array.from(document.querySelectorAll('.xmb-column'));
+const xmbMain = document.getElementById('xmb-main');
 const navSound = document.getElementById('nav');
 
+let sections = [];
 let sectionIndex = 0;
 let subsectionIndex = 0;
 
 const SECTION_TO_SUBMENU_GAP = 12;
 const MIN_SELECTED_TOP = 0;
+const SUBMENU_INDEX_CLASSES = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
 
 const playNavSound = () => {
   navSound.currentTime = 0;
   navSound.play().catch(() => {});
 };
 
-const moveMenu = (index) => {
-  const width = document.body.clientWidth;
-  const offsets = [
-    ['-26%', '-12%', '-12%'],
-    ['-10%', '18%', '18%'],
-    ['22%', '32%', '39%'],
-    ['50%', '47%', '60%'],
-    ['76%', '62%', '77%'],
-    ['100%', '77%', '97%']
-  ];
+const clamp = (value, min, max) => Math.max(min, Math.min(value, max));
 
-  const [hd, ultraHd, fullHd] = offsets[index] ?? offsets[0];
-  if (width < 1400) xmbMain.style.marginRight = hd;
-  else if (width >= 2560 && width <= 3840) xmbMain.style.marginRight = ultraHd;
-  else xmbMain.style.marginRight = fullHd;
+const getResponsiveOffsetProfile = (width) => {
+  if (width < 1400) return { base: -24, step: 24 };
+  if (width >= 2560 && width <= 3840) return { base: -12, step: 15 };
+  return { base: -12, step: 22 };
 };
 
+const moveMenu = (index) => {
+  const sectionCount = sections.length || 1;
+  const width = document.body.clientWidth;
+  const { base, step } = getResponsiveOffsetProfile(width);
+  const offset = base + (index * step);
+  const centeredOffset = offset - ((sectionCount - 6) * (step * 0.4));
+  xmbMain.style.marginRight = `${centeredOffset}%`;
+};
 
 const getActiveSubmenu = () => sections[sectionIndex]?.querySelectorAll('.submenu')[subsectionIndex] ?? null;
 
@@ -119,13 +119,16 @@ const stackActiveSubmenus = () => {
 };
 
 const updateSubmenuState = () => {
-  const currentSubmenus = Array.from(sections[sectionIndex].querySelectorAll('.submenu'));
-  subsectionIndex = Math.min(subsectionIndex, currentSubmenus.length - 1);
+  const currentSection = sections[sectionIndex];
+  if (!currentSection) return;
+
+  const currentSubmenus = Array.from(currentSection.querySelectorAll('.submenu'));
+  subsectionIndex = clamp(subsectionIndex, 0, Math.max(0, currentSubmenus.length - 1));
 
   sections.forEach((section) => {
     section.querySelectorAll('.submenu').forEach((submenu, idx) => {
       submenu.classList.remove('active', 'inactive', 'gotop');
-      if (section === sections[sectionIndex]) {
+      if (section === currentSection) {
         if (idx === subsectionIndex) submenu.classList.add('active');
         else if (idx < subsectionIndex) submenu.classList.add('inactive');
       }
@@ -140,13 +143,14 @@ const updateSectionState = () => {
     section.classList.toggle('active', idx === sectionIndex);
     section.style.transform = idx > sectionIndex ? 'translateX(160px)' : 'translateX(0)';
   });
+
   moveMenu(sectionIndex);
   updateSubmenuState();
   requestAnimationFrame(syncActiveSubmenuAlignment);
 };
 
 const setSection = (newIndex) => {
-  const boundedIndex = Math.max(0, Math.min(newIndex, sections.length - 1));
+  const boundedIndex = clamp(newIndex, 0, sections.length - 1);
   if (boundedIndex === sectionIndex) return;
 
   sectionIndex = boundedIndex;
@@ -156,7 +160,7 @@ const setSection = (newIndex) => {
 
 const setSubsection = (newIndex) => {
   const maxSub = sections[sectionIndex].querySelectorAll('.submenu').length - 1;
-  subsectionIndex = Math.max(0, Math.min(newIndex, maxSub));
+  subsectionIndex = clamp(newIndex, 0, maxSub);
   updateSubmenuState();
 };
 
@@ -186,7 +190,106 @@ const registerPointerNavigation = () => {
   });
 };
 
+const createItemNode = (item, idx) => {
+  const submenu = document.createElement('div');
+  const idxClass = SUBMENU_INDEX_CLASSES[idx] ?? `item-${idx + 1}`;
+  submenu.className = `submenu ${idxClass}`;
+
+  const hasAction = Boolean(item.enterUrl || item.link?.href);
+  if (hasAction) submenu.classList.add('enterable');
+  if (item.enterUrl) submenu.dataset.enterUrl = item.enterUrl;
+
+  const img = document.createElement('img');
+  img.className = item.imageClass || 'abimg';
+  img.src = item.image;
+  img.alt = item.alt || item.title || 'Item image';
+  submenu.appendChild(img);
+
+  const context = document.createElement('div');
+  context.className = 'context';
+
+  const title = document.createElement('p');
+  title.className = 'item-title';
+  title.textContent = item.title || '';
+  context.appendChild(title);
+
+  if (item.link?.href) {
+    const p = document.createElement('p');
+    p.className = 'subtext';
+
+    const a = document.createElement('a');
+    a.href = item.link.href;
+    a.textContent = item.link.text || item.link.href;
+
+    const isExternal = /^https?:/i.test(item.link.href);
+    if (isExternal) {
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+    }
+
+    p.appendChild(a);
+    context.appendChild(p);
+  } else if (item.subtext) {
+    const p = document.createElement('p');
+    p.className = 'subtext';
+    p.textContent = item.subtext;
+    context.appendChild(p);
+  }
+
+  if (item.subtext2) {
+    const p2 = document.createElement('p');
+    p2.className = 'subtext2';
+    p2.textContent = item.subtext2;
+    context.appendChild(p2);
+  }
+
+  submenu.appendChild(context);
+  return submenu;
+};
+
+const renderSections = (data) => {
+  xmbMain.innerHTML = '';
+
+  data.sections.forEach((sectionData, index) => {
+    const section = document.createElement('div');
+    section.className = 'xmb-title xmb-column';
+    if (sectionData.active || index === 0) section.classList.add('active');
+    if (sectionData.id) section.dataset.section = sectionData.id;
+
+    const icon = document.createElement('img');
+    icon.className = sectionData.iconClass || 'messages';
+    icon.src = sectionData.icon;
+    icon.alt = sectionData.title;
+
+    const title = document.createElement('p');
+    title.className = 'titletext';
+    title.textContent = sectionData.title;
+
+    const contents = document.createElement('div');
+    contents.className = 'xmb-contents';
+
+    (sectionData.items || []).forEach((item, idx) => {
+      contents.appendChild(createItemNode(item, idx));
+    });
+
+    section.append(icon, title, contents);
+    xmbMain.appendChild(section);
+  });
+
+  sections = Array.from(document.querySelectorAll('.xmb-column'));
+  sectionIndex = Math.max(0, sections.findIndex((section) => section.classList.contains('active')));
+  subsectionIndex = 0;
+};
+
+const loadPortfolioData = async () => {
+  const response = await fetch('data/portfolio.json', { cache: 'no-store' });
+  if (!response.ok) throw new Error(`Failed to load portfolio data (${response.status})`);
+  return response.json();
+};
+
 document.body.addEventListener('keydown', (e) => {
+  if (sections.length === 0) return;
+
   if (e.key === 'ArrowDown') {
     e.preventDefault();
     playNavSound();
@@ -214,17 +317,26 @@ document.body.addEventListener('keydown', (e) => {
   }
 });
 
-window.addEventListener('load', () => {
+window.addEventListener('load', async () => {
+  try {
+    const data = await loadPortfolioData();
+    renderSections(data);
+
+    updateSectionState();
+    registerPointerNavigation();
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error(error);
+  }
+
   video.play().catch(() => {});
   video.style.opacity = '1';
   menu.style.opacity = '1';
   document.body.classList.add('app-ready');
-
-  updateSectionState();
-  registerPointerNavigation();
 });
 
 window.addEventListener('resize', () => {
+  if (sections.length === 0) return;
   requestAnimationFrame(() => {
     syncActiveSubmenuAlignment();
     stackActiveSubmenus();

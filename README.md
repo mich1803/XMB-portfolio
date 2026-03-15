@@ -2,7 +2,6 @@
 
 A PS3-style XMB-inspired portfolio site built with vanilla HTML/CSS/JS.
 
-
 ## Open-source usage
 
 You are free to fork, modify, and use this project as your own academic/professional portfolio.
@@ -25,67 +24,84 @@ python3 -m http.server 8080
 
 Then open `http://localhost:8080`.
 
-### 2) Edit your portfolio sections
+> Important: use a local server (like `python3 -m http.server`). The app loads content from `data/portfolio.json`, and most browsers block `fetch` when opening `index.html` directly as a file.
 
-Main content lives in `index.html`.
+### 2) Edit your portfolio content in one file
 
-Current top-level sections are:
-- About
-- Education
-- Experience
-- Research
-- Side Projects
-- Contacts
+All menu/section content is now driven by:
 
-Each section has one or more `.submenu` blocks. Replace placeholder text with your own content.
+- `data/portfolio.json`
 
-### 3) Change About (photo + bio)
+You usually **do not need to edit `index.html`** anymore.
 
-In the `About` section (`data-section="about"`):
-- Replace title/subtext text.
-- Swap image paths in `<img src="...">`.
+### 3) JSON structure overview
 
-### 4) Update Education slots
+Top level:
 
-In the `Education` section (`data-section="education"`), there are 3 placeholders:
-- High School
-- Bachelor's Degree
-- Master's Degree
+```json
+{
+  "sections": []
+}
+```
 
-For each slot, fill in:
-- Institution
-- Degree
-- Field of Study
-- Description
+Each section supports:
 
-### 5) Update Experience / Research / Side Projects
+- `id`: unique section key (used as `data-section` in DOM)
+- `title`: top label
+- `icon`: path to section icon
+- `iconClass`: optional icon class (`home`, `settings`, `messages`, ...)
+- `active`: optional boolean (first active section)
+- `items`: array of submenu cards
 
-Each section includes one placeholder card. Replace with your own:
-- Experience: `Title · Company`
-- Research: `Title · Authors · Short Description · Keywords · DOI`
-- Side Projects: `Title · Short Description · Keywords · Repository Link`
+Each item supports:
 
-### 6) Update Contacts
+- `title`: item title
+- `image`: path to item icon/image
+- `imageClass`: optional image class (`abimg`, `resimg`, `sysimg`, ...)
+- `subtext`: optional line 1
+- `subtext2`: optional line 2
+- `enterUrl`: optional URL opened by Enter/click
+- `link`: optional inline link object:
+  - `href`
+  - `text`
 
-In the `Contacts` section, replace text/links with your profiles:
-- GitHub
-- LinkedIn
-- ORCID
-- Google Scholar
-- Instagram
+### 4) Rename or reorder columns
 
-### 7) Add a new section
+In `data/portfolio.json`, edit/reorder objects inside `sections`.
 
-1. Duplicate one `.xmb-title ...` block in `index.html`.
-2. Change its icon/title/submenus.
-3. In `js/script.js`, update the menu offset list in `moveMenu()` to include one more position for the new section.
+- Rename: change section `title`
+- Reorder: move section objects up/down
+- Change icon: edit `icon`
 
-### 8) Adjust styles
+### 5) Add a new column/section
 
-- Main styles are in `scss/main.css`.
-- Tune spacing, font sizes, glow effects, and animation timings there.
+1. Duplicate a section object in `sections`.
+2. Give it a new `id`.
+3. Update `title`, `icon`, and `items`.
 
-### 9) Deploy on GitHub Pages
+The UI/navigation is generated automatically from JSON, so no JS offset table update is required.
+
+### 6) Add/edit submenu entries
+
+Inside a section’s `items` array, add objects with `title`, `image`, and optional `subtext`/`subtext2`.
+
+For clickable entries:
+
+- use `enterUrl` for card-level open behavior
+- or use `link` to render a clickable anchor
+
+### 7) Optional style tuning
+
+- Main stylesheet: `scss/main.css`
+- Source modules: `scss/` folder
+
+If you introduce brand-new section IDs and want special spacing per section, you can add targeted CSS rules using:
+
+```css
+.xmb-main > .xmb-title.xmb-column[data-section="your-id"] { ... }
+```
+
+### 8) Deploy on GitHub Pages
 
 1. Push your repo to GitHub.
 2. Go to **Settings → Pages**.
