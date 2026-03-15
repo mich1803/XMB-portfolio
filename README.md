@@ -41,13 +41,13 @@ Each section has one or more `.submenu` blocks. Replace placeholder text with yo
 
 ### 3) Change About (photo + bio)
 
-In the `About` section (`.xmb-title.homeMenu`):
+In the `About` section (`data-section="about"`):
 - Replace title/subtext text.
 - Swap image paths in `<img src="...">`.
 
 ### 4) Update Education slots
 
-In the `Education` section (`.xmb-title.settings`), there are 3 placeholders:
+In the `Education` section (`data-section="education"`), there are 3 placeholders:
 - High School
 - Bachelor's Degree
 - Master's Degree

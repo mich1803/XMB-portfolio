@@ -1,23 +1,5 @@
 @use "../abstract/" as *;
 
-.xmb-main > .xmb-title.xmb-column[data-section="about"].active {
-    .xmb-contents {
-        .submenu.one {
-            &.active {
-                .about-bg {
-                    opacity: 1;
-                }
-            }
-
-            &.inactive {
-                .about-bg {
-                    opacity: 0;
-                }
-            }
-        }
-    }
-}
-
 .xmb-main > .xmb-title.xmb-column[data-section="education"] {
     .xmb-contents {
         .submenu {
