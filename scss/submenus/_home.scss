@@ -1,6 +1,6 @@
 @use "../abstract/" as *;
 
-.xmb-title.homeMenu.active{
+.xmb-main > .xmb-title.xmb-column:nth-child(1).active{
     .xmb-contents{
         .submenu.one{
             &.active{

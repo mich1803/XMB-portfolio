@@ -1,6 +1,6 @@
 @use "../abstract/" as *;
 
-.xmb-title.games{
+.xmb-main > .xmb-title.xmb-column:nth-child(5){
     .xmb-contents{
         margin-top: 70px;
         margin-left: 10px;

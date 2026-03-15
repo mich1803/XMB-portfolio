@@ -1,6 +1,6 @@
 @use "../abstract/" as *;
 
-.xmb-title.messages{
+.xmb-main > .xmb-title.xmb-column:nth-child(3){
     .xmb-contents{
         margin-top: 15px;
         margin-left: 40px;

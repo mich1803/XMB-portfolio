@@ -1,15 +1,13 @@
 @use "../abstract/" as *;
 
-.xmb-title{
-    &.settings{
-        .titletext{
-            margin-top: -2px;
-        }
-        margin-left: 80px;
-        @include displayInactive;
-        &.active{
-            transition: all 300ms ease-in-out;
-            @include displayActive;
-        }
+.xmb-main > .xmb-title.xmb-column:nth-child(2){
+    .titletext{
+        margin-top: -2px;
+    }
+    margin-left: 80px;
+    @include displayInactive;
+    &.active{
+        transition: all 300ms ease-in-out;
+        @include displayActive;
     }
 }

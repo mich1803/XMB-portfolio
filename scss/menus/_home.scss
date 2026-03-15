@@ -1,6 +1,6 @@
 @use "../abstract/" as *;
 
-.xmb-title.homeMenu{
+.xmb-main > .xmb-title.xmb-column:nth-child(1){
     transition: margin-left 200ms;
     @include displayInactive;
     &.active{

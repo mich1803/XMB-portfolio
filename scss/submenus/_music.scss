@@ -1,6 +1,6 @@
 @use "../abstract/" as *;
 
-.xmb-title.music{
+.xmb-main > .xmb-title.xmb-column:nth-child(4){
     .xmb-contents{
         margin-right: 25px !important;
         .submenu.one{
