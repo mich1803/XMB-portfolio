@@ -832,6 +832,10 @@ body.app-ready {
   outline: none;
 }
 
+.xmb-contents .submenu .context .item-title {
+  color: #d9e1ea;
+}
+
 .xmb-contents .submenu.enterable .context .item-title::after {
   content: "  ⏎";
   font-size: 0.72em;
@@ -839,9 +843,13 @@ body.app-ready {
   letter-spacing: 0.02em;
 }
 
-.xmb-contents .submenu.enterable.active .context .item-title {
-  color: #f3fbff;
+.xmb-contents .submenu.active .context .item-title {
+  color: #f3fbff !important;
   text-shadow: 0 0 3px rgba(170, 215, 255, 0.95), 0 0 9px rgba(125, 193, 255, 0.75) !important;
+}
+
+.xmb-contents .submenu.enterable.active .context .item-title {
+  color: #f3fbff !important;
 }
 
 .xmb-contents .submenu.enterable.active .context .item-title::after {
