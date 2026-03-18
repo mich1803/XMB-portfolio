@@ -921,7 +921,7 @@ body.app-ready {
 
   .xmb-title.active .xmb-contents {
     min-width: 0 !important;
-    width: min(calc(100vw - 148px), 168px);
+    width: min(calc(100vw - 156px), 152px);
     margin-top: 16px !important;
   }
 
@@ -930,7 +930,7 @@ body.app-ready {
     grid-template-columns: 30px minmax(0, 1fr);
     column-gap: 7px;
     width: 100%;
-    max-width: min(calc(100vw - 148px), 168px);
+    max-width: min(calc(100vw - 156px), 152px);
     padding-bottom: 8px;
   }
 
@@ -941,25 +941,25 @@ body.app-ready {
 
   .xmb-title.active .xmb-contents .submenu .context {
     min-width: 0 !important;
-    width: 100% !important;
-    max-width: 100% !important;
+    width: min(100%, 115px) !important;
+    max-width: min(100%, 115px) !important;
     overflow-wrap: anywhere;
     word-break: break-word;
   }
 
   .xmb-contents .submenu .context .item-title {
-    font-size: 0.76rem;
-    line-height: 1.15;
+    font-size: 0.72rem;
+    line-height: 1.12;
   }
 
   .xmb-contents .submenu .context .subtext {
-    font-size: 0.58rem !important;
-    line-height: 1.2;
+    font-size: 0.56rem !important;
+    line-height: 1.16;
   }
 
   .xmb-contents .submenu .context .subtext2 {
-    font-size: 0.54rem !important;
-    line-height: 1.18;
+    font-size: 0.52rem !important;
+    line-height: 1.14;
   }
 
   .mobile-joystick {

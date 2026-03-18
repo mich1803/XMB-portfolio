@@ -173,6 +173,31 @@ const ensureActiveSectionVisible = () => {
   }
 };
 
+const refreshActiveLayout = () => {
+  if (sections.length === 0) return;
+
+  moveMenu(sectionIndex);
+  ensureActiveSectionVisible();
+  updateSubmenuState();
+  syncActiveSubmenuAlignment();
+  stackActiveSubmenus();
+};
+
+const stabilizeInitialMobileLayout = () => {
+  if (!isMobileView || sections.length === 0) return;
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(refreshActiveLayout);
+  });
+
+  window.setTimeout(refreshActiveLayout, 180);
+
+  xmbMain.querySelectorAll('img').forEach((img) => {
+    if (img.complete) return;
+    img.addEventListener('load', refreshActiveLayout, { once: true });
+  });
+};
+
 const triggerEnterAction = () => {
   const activeSubmenu = getActiveSubmenu();
   if (!activeSubmenu) return false;
@@ -431,6 +456,7 @@ window.addEventListener('load', async () => {
 
     updateMobileMode();
     updateSectionState();
+    stabilizeInitialMobileLayout();
     registerPointerNavigation();
     registerMobileJoystick();
   } catch (error) {
@@ -448,9 +474,6 @@ window.addEventListener('resize', () => {
   updateMobileMode();
   if (sections.length === 0) return;
   requestAnimationFrame(() => {
-    moveMenu(sectionIndex);
-    ensureActiveSectionVisible();
-    syncActiveSubmenuAlignment();
-    stackActiveSubmenus();
+    refreshActiveLayout();
   });
 });
