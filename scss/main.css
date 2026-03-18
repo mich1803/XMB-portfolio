@@ -921,28 +921,28 @@ body.app-ready {
 
   .xmb-title.active .xmb-contents {
     min-width: 0 !important;
-    width: min(calc(100vw - 156px), 152px);
+    width: min(calc(100vw - 164px), 142px);
     margin-top: 16px !important;
   }
 
   .xmb-title.active .xmb-contents .submenu {
     transform: none !important;
-    grid-template-columns: 30px minmax(0, 1fr);
+    grid-template-columns: 34px minmax(0, 1fr);
     column-gap: 7px;
     width: 100%;
-    max-width: min(calc(100vw - 156px), 152px);
+    max-width: min(calc(100vw - 164px), 142px);
     padding-bottom: 8px;
   }
 
   .xmb-title.active .xmb-contents .submenu img,
   .xmb-main > .xmb-title.xmb-column[data-section="contacts"].active .xmb-contents .submenu img {
-    width: 30px !important;
+    width: 34px !important;
   }
 
   .xmb-title.active .xmb-contents .submenu .context {
     min-width: 0 !important;
-    width: min(100%, 115px) !important;
-    max-width: min(100%, 115px) !important;
+    width: min(100%, 96px) !important;
+    max-width: min(100%, 96px) !important;
     overflow-wrap: anywhere;
     word-break: break-word;
   }
