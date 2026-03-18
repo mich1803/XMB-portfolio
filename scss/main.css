@@ -3,17 +3,22 @@
 
 
 .back-vid {
-  position: absolute;
-  right: 0;
-  top: 0;
+  position: fixed;
+  inset: 0;
   z-index: -1;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
+  min-height: 100vh;
   -o-object-fit: cover;
   object-fit: cover;
   opacity: 0;
   transition: opacity 10s;
   pointer-events: none;
+}
+
+html,
+body {
+  min-height: 100%;
 }
 
 body {
@@ -866,4 +871,156 @@ body.app-ready {
 .xmb-help-banner .hint-sep {
   opacity: 0.55;
   margin: 0 8px;
+}
+/* Mobile UX: joystick controls + tighter layout while preserving desktop */
+.mobile-joystick {
+  display: none;
+}
+
+@media (max-width: 900px), (pointer: coarse) {
+  body {
+    min-height: 100dvh;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .back-vid {
+    height: 100dvh;
+    min-height: 100dvh;
+  }
+
+  .xmb-help-banner {
+    display: none;
+  }
+
+  #menu {
+    min-height: 100dvh;
+    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 180px);
+  }
+
+  .xmb-main {
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-top: max(84px, calc(env(safe-area-inset-top, 0px) + 64px)) !important;
+    padding-left: 8px;
+  }
+
+  .xmb-title {
+    min-width: 68px;
+  }
+
+  .xmb-title > img {
+    max-width: 62px;
+    height: auto;
+  }
+
+  .xmb-title .titletext {
+    font-size: 0.68rem;
+    margin-top: 8px;
+  }
+
+  .xmb-title.active .xmb-contents {
+    min-width: 0 !important;
+    width: min(calc(100vw - 164px), 142px);
+    margin-top: 16px !important;
+  }
+
+  .xmb-title.active .xmb-contents .submenu {
+    transform: none !important;
+    grid-template-columns: 34px minmax(0, 1fr);
+    column-gap: 7px;
+    width: 100%;
+    max-width: min(calc(100vw - 164px), 142px);
+    padding-bottom: 8px;
+  }
+
+  .xmb-title.active .xmb-contents .submenu img,
+  .xmb-main > .xmb-title.xmb-column[data-section="contacts"].active .xmb-contents .submenu img {
+    width: 34px !important;
+  }
+
+  .xmb-title.active .xmb-contents .submenu .context {
+    min-width: 0 !important;
+    width: min(100%, 96px) !important;
+    max-width: min(100%, 96px) !important;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .xmb-contents .submenu .context .item-title {
+    font-size: 0.72rem;
+    line-height: 1.12;
+  }
+
+  .xmb-contents .submenu .context .subtext {
+    font-size: 0.56rem !important;
+    line-height: 1.16;
+  }
+
+  .xmb-contents .submenu .context .subtext2 {
+    font-size: 0.52rem !important;
+    line-height: 1.14;
+  }
+
+  .mobile-joystick {
+    position: fixed;
+    right: 10px;
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 56px);
+    width: 110px;
+    height: 110px;
+    z-index: 50;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 5px;
+    padding: 7px;
+    border-radius: 18px;
+    border: 1px solid rgba(206, 231, 255, 0.4);
+    background: rgba(8, 22, 54, 0.6);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 0 12px rgba(104, 175, 255, 0.35);
+  }
+
+  .joy-btn {
+    appearance: none;
+    border: 0;
+    border-radius: 9px;
+    background: rgba(208, 230, 255, 0.16);
+    color: #f5fbff;
+    font-size: 0.88rem;
+    font-weight: 700;
+    line-height: 1;
+    text-shadow: 0 0 5px rgba(200, 230, 255, 0.75);
+    touch-action: manipulation;
+  }
+
+  .joy-btn:active {
+    background: rgba(208, 230, 255, 0.35);
+    transform: scale(0.96);
+  }
+
+  .joy-up {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .joy-left {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .joy-center {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .joy-right {
+    grid-column: 3;
+    grid-row: 2;
+  }
+
+  .joy-down {
+    grid-column: 2;
+    grid-row: 3;
+  }
 }
