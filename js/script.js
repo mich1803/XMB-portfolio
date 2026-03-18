@@ -17,6 +17,8 @@ const MIN_SELECTED_TOP = 0;
 const SUBMENU_INDEX_CLASSES = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
 const MENU_BASE_SHIFT_X = -120;
 const MENU_STEP_SHIFT_X = 190;
+const MOBILE_MENU_BASE_SHIFT_X = -48;
+const MOBILE_MENU_STEP_SHIFT_X = 126;
 
 const playNavSound = () => {
   navSound.currentTime = 0;
@@ -26,7 +28,9 @@ const playNavSound = () => {
 const clamp = (value, min, max) => Math.max(min, Math.min(value, max));
 
 const moveMenu = (index) => {
-  const shift = MENU_BASE_SHIFT_X - (index * MENU_STEP_SHIFT_X) + mobileShiftX;
+  const baseShift = isMobileView ? MOBILE_MENU_BASE_SHIFT_X : MENU_BASE_SHIFT_X;
+  const stepShift = isMobileView ? MOBILE_MENU_STEP_SHIFT_X : MENU_STEP_SHIFT_X;
+  const shift = baseShift - (index * stepShift) + mobileShiftX;
   xmbMain.style.marginRight = '0';
   xmbMain.style.transform = `translateX(${shift}px)`;
 };
@@ -130,16 +134,20 @@ const ensureActiveSectionVisible = () => {
   const activeSection = sections[sectionIndex];
   if (!activeSection) return;
 
+  const activeSubmenu = getActiveSubmenu();
   const sectionRect = activeSection.getBoundingClientRect();
-  const safePadding = 22;
+  const submenuRect = activeSubmenu?.getBoundingClientRect();
+  const footprintLeft = Math.min(sectionRect.left, submenuRect?.left ?? sectionRect.left);
+  const footprintRight = Math.max(sectionRect.right, submenuRect?.right ?? sectionRect.right);
+  const safePadding = 12;
   const safeLeft = safePadding;
   const safeRight = window.innerWidth - safePadding;
 
   let correction = 0;
-  if (sectionRect.left < safeLeft) {
-    correction = safeLeft - sectionRect.left;
-  } else if (sectionRect.right > safeRight) {
-    correction = safeRight - sectionRect.right;
+  if (footprintLeft < safeLeft) {
+    correction = safeLeft - footprintLeft;
+  } else if (footprintRight > safeRight) {
+    correction = safeRight - footprintRight;
   }
 
   if (correction !== 0) {
@@ -197,7 +205,10 @@ const updateSubmenuState = () => {
     });
   });
 
-  requestAnimationFrame(stackActiveSubmenus);
+  requestAnimationFrame(() => {
+    stackActiveSubmenus();
+    ensureActiveSectionVisible();
+  });
 };
 
 const updateSectionState = () => {

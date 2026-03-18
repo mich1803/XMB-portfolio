@@ -873,65 +873,95 @@ body.app-ready {
 }
 
 @media (max-width: 900px), (pointer: coarse) {
+  body {
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
   .xmb-help-banner {
     display: none;
   }
 
+  #menu {
+    min-height: 100vh;
+    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 180px);
+  }
+
   .xmb-main {
     justify-content: flex-start;
-    margin-top: 24% !important;
-    padding-left: 14px;
+    align-items: flex-start;
+    margin-top: max(88px, calc(env(safe-area-inset-top, 0px) + 72px)) !important;
+    padding-left: 12px;
   }
 
   .xmb-title {
-    min-width: 84px;
+    min-width: 72px;
+  }
+
+  .xmb-title > img {
+    max-width: 68px;
+    height: auto;
   }
 
   .xmb-title .titletext {
-    font-size: 0.78rem;
+    font-size: 0.68rem;
+    margin-top: 8px;
+  }
+
+  .xmb-title.active .xmb-contents {
+    min-width: 0 !important;
+    width: min(calc(100vw - 96px), 260px);
+    margin-top: 18px !important;
   }
 
   .xmb-title.active .xmb-contents .submenu {
-    grid-template-columns: 58px minmax(170px, 1fr);
-    column-gap: 10px;
-    max-width: calc(100vw - 24px);
+    transform: none !important;
+    grid-template-columns: 44px minmax(0, 1fr);
+    column-gap: 12px;
+    width: 100%;
+    max-width: min(calc(100vw - 96px), 260px);
+    padding-bottom: 12px;
   }
 
   .xmb-title.active .xmb-contents .submenu img,
   .xmb-main > .xmb-title.xmb-column[data-section="contacts"].active .xmb-contents .submenu img {
-    width: 58px !important;
+    width: 44px !important;
   }
 
   .xmb-title.active .xmb-contents .submenu .context {
     min-width: 0 !important;
-    max-width: calc(100vw - 104px) !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-wrap: anywhere;
   }
 
   .xmb-contents .submenu .context .item-title {
-    font-size: 1rem;
+    font-size: 0.88rem;
   }
 
   .xmb-contents .submenu .context .subtext {
-    font-size: 0.78rem !important;
+    font-size: 0.68rem !important;
+    line-height: 1.28;
   }
 
   .xmb-contents .submenu .context .subtext2 {
-    font-size: 0.68rem !important;
+    font-size: 0.62rem !important;
+    line-height: 1.25;
   }
 
   .mobile-joystick {
     position: fixed;
-    right: 12px;
-    bottom: 12px;
-    width: 142px;
-    height: 142px;
+    right: 10px;
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 72px);
+    width: 118px;
+    height: 118px;
     z-index: 50;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
-    gap: 6px;
-    padding: 8px;
-    border-radius: 20px;
+    gap: 5px;
+    padding: 7px;
+    border-radius: 18px;
     border: 1px solid rgba(206, 231, 255, 0.4);
     background: rgba(8, 22, 54, 0.6);
     backdrop-filter: blur(5px);
@@ -941,10 +971,10 @@ body.app-ready {
   .joy-btn {
     appearance: none;
     border: 0;
-    border-radius: 10px;
+    border-radius: 9px;
     background: rgba(208, 230, 255, 0.16);
     color: #f5fbff;
-    font-size: 1rem;
+    font-size: 0.88rem;
     font-weight: 700;
     line-height: 1;
     text-shadow: 0 0 5px rgba(200, 230, 255, 0.75);
