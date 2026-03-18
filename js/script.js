@@ -41,10 +41,30 @@ const getActiveSubmenu = () => sections[sectionIndex]?.querySelectorAll('.submen
 const openEnterableFromSubmenu = (submenu) => {
   if (!submenu) return false;
 
-  const url = submenu.dataset.enterUrl || submenu.querySelector('a[href]')?.href;
+  const link = submenu.querySelector('a[href]');
+  if (link) {
+    const href = link.href || link.getAttribute('href');
+    if (!href) return false;
+
+    const shouldOpenNewTab = link.target === '_blank';
+    if (isMobileView) {
+      window.location.assign(href);
+    } else if (shouldOpenNewTab) {
+      window.open(href, '_blank', 'noopener,noreferrer');
+    } else {
+      window.location.assign(href);
+    }
+    return true;
+  }
+
+  const url = submenu.dataset.enterUrl;
   if (!url) return false;
 
-  window.open(url, '_blank', 'noopener,noreferrer');
+  if (isMobileView) {
+    window.location.assign(url);
+  } else {
+    window.open(url, '_blank', 'noopener,noreferrer');
+  }
   return true;
 };
 
@@ -265,14 +285,24 @@ const registerMobileJoystick = () => {
 
   const buttons = mobileJoystick.querySelectorAll('[data-dir]');
   buttons.forEach((button) => {
+    let lastActivationAt = 0;
+
     const activate = (event) => {
+      const now = Date.now();
+      if (now - lastActivationAt < 250) {
+        event.preventDefault();
+        event.stopPropagation();
+        return;
+      }
+
+      lastActivationAt = now;
       event.preventDefault();
       event.stopPropagation();
       handleDirectionInput(button.dataset.dir);
     };
 
+    button.addEventListener('touchend', activate);
     button.addEventListener('click', activate);
-    button.addEventListener('touchstart', activate, { passive: false });
   });
 };
 
