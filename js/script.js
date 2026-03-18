@@ -17,8 +17,9 @@ const MIN_SELECTED_TOP = 0;
 const SUBMENU_INDEX_CLASSES = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
 const MENU_BASE_SHIFT_X = -120;
 const MENU_STEP_SHIFT_X = 190;
-const MOBILE_MENU_BASE_SHIFT_X = -48;
-const MOBILE_MENU_STEP_SHIFT_X = 126;
+const MOBILE_MENU_BASE_SHIFT_X = -28;
+const MOBILE_MENU_STEP_SHIFT_X = 98;
+const MOBILE_INACTIVE_SECTION_OFFSET_X = 72;
 
 const playNavSound = () => {
   navSound.currentTime = 0;
@@ -134,20 +135,16 @@ const ensureActiveSectionVisible = () => {
   const activeSection = sections[sectionIndex];
   if (!activeSection) return;
 
-  const activeSubmenu = getActiveSubmenu();
   const sectionRect = activeSection.getBoundingClientRect();
-  const submenuRect = activeSubmenu?.getBoundingClientRect();
-  const footprintLeft = Math.min(sectionRect.left, submenuRect?.left ?? sectionRect.left);
-  const footprintRight = Math.max(sectionRect.right, submenuRect?.right ?? sectionRect.right);
-  const safePadding = 12;
+  const safePadding = 18;
   const safeLeft = safePadding;
   const safeRight = window.innerWidth - safePadding;
 
   let correction = 0;
-  if (footprintLeft < safeLeft) {
-    correction = safeLeft - footprintLeft;
-  } else if (footprintRight > safeRight) {
-    correction = safeRight - footprintRight;
+  if (sectionRect.left < safeLeft) {
+    correction = safeLeft - sectionRect.left;
+  } else if (sectionRect.right > safeRight) {
+    correction = safeRight - sectionRect.right;
   }
 
   if (correction !== 0) {
@@ -205,16 +202,14 @@ const updateSubmenuState = () => {
     });
   });
 
-  requestAnimationFrame(() => {
-    stackActiveSubmenus();
-    ensureActiveSectionVisible();
-  });
+  requestAnimationFrame(stackActiveSubmenus);
 };
 
 const updateSectionState = () => {
+  const inactiveOffset = isMobileView ? MOBILE_INACTIVE_SECTION_OFFSET_X : 160;
   sections.forEach((section, idx) => {
     section.classList.toggle('active', idx === sectionIndex);
-    section.style.transform = idx > sectionIndex ? 'translateX(160px)' : 'translateX(0)';
+    section.style.transform = idx > sectionIndex ? `translateX(${inactiveOffset}px)` : 'translateX(0)';
   });
 
   moveMenu(sectionIndex);
