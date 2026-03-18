@@ -867,3 +867,117 @@ body.app-ready {
   opacity: 0.55;
   margin: 0 8px;
 }
+/* Mobile UX: joystick controls + tighter layout while preserving desktop */
+.mobile-joystick {
+  display: none;
+}
+
+@media (max-width: 900px), (pointer: coarse) {
+  .xmb-help-banner {
+    display: none;
+  }
+
+  .xmb-main {
+    justify-content: flex-start;
+    margin-top: 24% !important;
+    padding-left: 14px;
+  }
+
+  .xmb-title {
+    min-width: 84px;
+  }
+
+  .xmb-title .titletext {
+    font-size: 0.78rem;
+  }
+
+  .xmb-title.active .xmb-contents .submenu {
+    grid-template-columns: 58px minmax(170px, 1fr);
+    column-gap: 10px;
+    max-width: calc(100vw - 24px);
+  }
+
+  .xmb-title.active .xmb-contents .submenu img,
+  .xmb-main > .xmb-title.xmb-column[data-section="contacts"].active .xmb-contents .submenu img {
+    width: 58px !important;
+  }
+
+  .xmb-title.active .xmb-contents .submenu .context {
+    min-width: 0 !important;
+    max-width: calc(100vw - 104px) !important;
+  }
+
+  .xmb-contents .submenu .context .item-title {
+    font-size: 1rem;
+  }
+
+  .xmb-contents .submenu .context .subtext {
+    font-size: 0.78rem !important;
+  }
+
+  .xmb-contents .submenu .context .subtext2 {
+    font-size: 0.68rem !important;
+  }
+
+  .mobile-joystick {
+    position: fixed;
+    right: 12px;
+    bottom: 12px;
+    width: 142px;
+    height: 142px;
+    z-index: 50;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 6px;
+    padding: 8px;
+    border-radius: 20px;
+    border: 1px solid rgba(206, 231, 255, 0.4);
+    background: rgba(8, 22, 54, 0.6);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 0 12px rgba(104, 175, 255, 0.35);
+  }
+
+  .joy-btn {
+    appearance: none;
+    border: 0;
+    border-radius: 10px;
+    background: rgba(208, 230, 255, 0.16);
+    color: #f5fbff;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1;
+    text-shadow: 0 0 5px rgba(200, 230, 255, 0.75);
+    touch-action: manipulation;
+  }
+
+  .joy-btn:active {
+    background: rgba(208, 230, 255, 0.35);
+    transform: scale(0.96);
+  }
+
+  .joy-up {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .joy-left {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .joy-center {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .joy-right {
+    grid-column: 3;
+    grid-row: 2;
+  }
+
+  .joy-down {
+    grid-column: 2;
+    grid-row: 3;
+  }
+}

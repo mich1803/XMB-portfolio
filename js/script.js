@@ -2,10 +2,15 @@ const video = document.getElementById('vid');
 const menu = document.getElementById('menu');
 const xmbMain = document.getElementById('xmb-main');
 const navSound = document.getElementById('nav');
+const mobileJoystick = document.getElementById('mobile-joystick');
+
+const MOBILE_MEDIA_QUERY = '(max-width: 900px), (pointer: coarse)';
 
 let sections = [];
 let sectionIndex = 0;
 let subsectionIndex = 0;
+let mobileShiftX = 0;
+let isMobileView = false;
 
 const SECTION_TO_SUBMENU_GAP = 12;
 const MIN_SELECTED_TOP = 0;
@@ -21,7 +26,7 @@ const playNavSound = () => {
 const clamp = (value, min, max) => Math.max(min, Math.min(value, max));
 
 const moveMenu = (index) => {
-  const shift = MENU_BASE_SHIFT_X - (index * MENU_STEP_SHIFT_X);
+  const shift = MENU_BASE_SHIFT_X - (index * MENU_STEP_SHIFT_X) + mobileShiftX;
   xmbMain.style.marginRight = '0';
   xmbMain.style.transform = `translateX(${shift}px)`;
 };
@@ -111,6 +116,70 @@ const stackActiveSubmenus = () => {
   });
 };
 
+const detectMobileView = () => window.matchMedia(MOBILE_MEDIA_QUERY).matches;
+
+const updateMobileMode = () => {
+  isMobileView = detectMobileView();
+  document.body.classList.toggle('mobile-mode', isMobileView);
+  if (!isMobileView) mobileShiftX = 0;
+};
+
+const ensureActiveSectionVisible = () => {
+  if (!isMobileView || sections.length === 0) return;
+
+  const activeSection = sections[sectionIndex];
+  if (!activeSection) return;
+
+  const sectionRect = activeSection.getBoundingClientRect();
+  const safePadding = 22;
+  const safeLeft = safePadding;
+  const safeRight = window.innerWidth - safePadding;
+
+  let correction = 0;
+  if (sectionRect.left < safeLeft) {
+    correction = safeLeft - sectionRect.left;
+  } else if (sectionRect.right > safeRight) {
+    correction = safeRight - sectionRect.right;
+  }
+
+  if (correction !== 0) {
+    mobileShiftX += correction;
+    moveMenu(sectionIndex);
+  }
+};
+
+const triggerEnterAction = () => {
+  const activeSubmenu = getActiveSubmenu();
+  if (!activeSubmenu) return false;
+
+  if (openEnterableFromSubmenu(activeSubmenu)) {
+    playNavSound();
+    return true;
+  }
+
+  return false;
+};
+
+const handleDirectionInput = (direction) => {
+  if (sections.length === 0) return;
+
+  if (direction === 'down') {
+    playNavSound();
+    setSubsection(subsectionIndex + 1);
+  } else if (direction === 'up') {
+    playNavSound();
+    setSubsection(subsectionIndex - 1);
+  } else if (direction === 'right') {
+    playNavSound();
+    setSection(sectionIndex + 1);
+  } else if (direction === 'left') {
+    playNavSound();
+    setSection(sectionIndex - 1);
+  } else if (direction === 'enter') {
+    triggerEnterAction();
+  }
+};
+
 const updateSubmenuState = () => {
   const currentSection = sections[sectionIndex];
   if (!currentSection) return;
@@ -138,6 +207,7 @@ const updateSectionState = () => {
   });
 
   moveMenu(sectionIndex);
+  ensureActiveSectionVisible();
   updateSubmenuState();
   requestAnimationFrame(syncActiveSubmenuAlignment);
 };
@@ -180,6 +250,23 @@ const registerPointerNavigation = () => {
         setSubsection(subIndex);
       }, { passive: true });
     });
+  });
+};
+
+
+const registerMobileJoystick = () => {
+  if (!mobileJoystick) return;
+
+  const buttons = mobileJoystick.querySelectorAll('[data-dir]');
+  buttons.forEach((button) => {
+    const activate = (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      handleDirectionInput(button.dataset.dir);
+    };
+
+    button.addEventListener('click', activate);
+    button.addEventListener('touchstart', activate, { passive: false });
   });
 };
 
@@ -285,28 +372,19 @@ document.body.addEventListener('keydown', (e) => {
 
   if (e.key === 'ArrowDown') {
     e.preventDefault();
-    playNavSound();
-    setSubsection(subsectionIndex + 1);
+    handleDirectionInput('down');
   } else if (e.key === 'ArrowUp') {
     e.preventDefault();
-    playNavSound();
-    setSubsection(subsectionIndex - 1);
+    handleDirectionInput('up');
   } else if (e.key === 'ArrowRight') {
     e.preventDefault();
-    playNavSound();
-    setSection(sectionIndex + 1);
+    handleDirectionInput('right');
   } else if (e.key === 'ArrowLeft') {
     e.preventDefault();
-    playNavSound();
-    setSection(sectionIndex - 1);
+    handleDirectionInput('left');
   } else if (e.key === 'Enter') {
-    const activeSubmenu = getActiveSubmenu();
-    if (!activeSubmenu) return;
-
-    if (openEnterableFromSubmenu(activeSubmenu)) {
-      e.preventDefault();
-      playNavSound();
-    }
+    e.preventDefault();
+    handleDirectionInput('enter');
   }
 });
 
@@ -315,8 +393,10 @@ window.addEventListener('load', async () => {
     const data = await loadPortfolioData();
     renderSections(data);
 
+    updateMobileMode();
     updateSectionState();
     registerPointerNavigation();
+    registerMobileJoystick();
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error(error);
@@ -329,8 +409,11 @@ window.addEventListener('load', async () => {
 });
 
 window.addEventListener('resize', () => {
+  updateMobileMode();
   if (sections.length === 0) return;
   requestAnimationFrame(() => {
+    moveMenu(sectionIndex);
+    ensureActiveSectionVisible();
     syncActiveSubmenuAlignment();
     stackActiveSubmenus();
   });
