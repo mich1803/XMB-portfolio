@@ -67,8 +67,24 @@
       "iconClass": "messages",
       "items": [
         {
+          "title": "XAI Analysis of Foreshocks and Aftershocks in Swiss sequence",
+          "subtext": "L. Laurenti et al. 2026 (XAI, Seismology)",
+          "subtext2": "Analysis of SHAP on a Swiss microseismic sequence and explore new XAI techniques.",
+          "image": "images/eq.png",
+          "imageClass": "abimg",
+          "enterUrl": "https://doi.org/10.5194/egusphere-egu26-13268"
+        },
+        {
+          "title": "Norcia 2016 Station-Level and Network-Wide SHAP Explanation",
+          "subtext": "F. Marrocco et al. 2026 (XAI, Seismology)",
+          "subtext2": "Analysis of SHAP results for the understanding of Seismic Cycle.",
+          "image": "images/eq.png",
+          "imageClass": "abimg",
+          "enterUrl": "https://doi.org/10.5194/egusphere-egu26-10105"
+        },
+        {
           "title": "Explainable CNN for Earthquake Phase Classification",
-          "subtext": "M. Magrini et al. 2026 (XAI, Seismology)",
+          "subtext": "M. Magrini et al. 2025 (XAI, Seismology)",
           "subtext2": "RGB spectrogram CNN with SHAP can reveal time-frequency features linked to fault-zone evolution.",
           "image": "images/eq.png",
           "imageClass": "abimg",
