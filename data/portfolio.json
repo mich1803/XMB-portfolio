@@ -52,14 +52,14 @@
       "iconClass": "messages",
       "items": [
         {
-          "title": "Scholarship Researcher",
+          "title": "ML Researcher (Scholarship)",
           "subtext": "La Sapienza (Earth Science), 2025-2026",
-          "subtext2": "Exploring and Evaluating Explainable AI techniques applies to seismology.",
+          "subtext2": "Exploring and Evaluating Explainable AI techniques applied to seismology.",
           "image": "images/eq.png",
           "imageClass": "abimg"
         },
         {
-          "title": "ML Researcher",
+          "title": "ML Researcher (Collaboration)",
           "subtext": "Sensichips SRL, 2025",
           "subtext2": "Design and optimization of machine learning models and algorithms for embedded, low-power, and resource-constrained environments for time series classification.",
           "image": "images/chip.png",
