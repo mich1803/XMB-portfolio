@@ -9,8 +9,8 @@
       "items": [
         {
           "title": "Michele Magrini",
-          "subtext": "ML Student Researcher",
-          "subtext2": "I am a technically driven student researcher with a strong interest in machine learning and applied mathematics.\n I enjoy building practical experimental projects that connect theory with real-world implementations, while continuously expanding my scientific and engineering skill set. \nOutside of research and coding, I’m passionate about basketball, music, and creative digital design.",
+          "subtext": "MSc in Applied Matematics & AI",
+          "subtext2": "I am a technically driven student researcher with a strong interest in machine learning and applied mathematics. ",
           "image": "images/propic.png",
           "imageClass": "abimg"
         }
@@ -76,13 +76,13 @@
         {
           "title": "XAI Foreshocks/Aftershocks Analysis in Diemtigen (CH)",
           "subtext": "L. Laurenti et al. 2026 (XAI, Seismology) [EGU26 Abstract]",
-          "subtext2": "Analysis of SHAP on a Swiss microseismic sequence and exploring of new ante-hoc XAI techniques. [Collaboration with SED (Swiss Seismological Service)]",
+          "subtext2": "Analysis of SHAP on a Swiss microseismic sequence and exploring of new ante-hoc XAI techniques.",
           "image": "images/eq.png",
           "imageClass": "abimg",
           "enterUrl": "https://doi.org/10.5194/egusphere-egu26-13268"
         },
         {
-          "title": "Norcia 2016 Station-Level and Network-Wide SHAP Explanation",
+          "title": "Norcia (IT) 2016 Station-Level and Network-Wide SHAP Explanation",
           "subtext": "F. Marrocco et al. 2026 (XAI, Seismology) [EGU26 Abstract]",
           "subtext2": "Analysis of SHAP results for the understanding of Seismic Cycle.",
           "image": "images/eq.png",
